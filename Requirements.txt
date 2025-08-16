@@ -1,0 +1,306 @@
+ROLE & GOAL
+
+You are a senior full-stack engineer + art director. Build a production-ready, luxury e-commerce site for JRZ Pro Black DLC skate blades, targeted to the Russian market with RU/EN support, YooKassa (ЮKassa) redirect checkout, and a one-week delivery mindset. Ship a complete Next.js 15 (App Router) project with all code files, ready to npm i && npm run dev.
+
+STACK
+
+Next.js 15 (App Router, TypeScript, src/), React 18, TailwindCSS, Framer Motion (page + micro-interactions), react-three-fiber + drei (3D hero), next-intl (i18n routing), Zustand (cart), Zod/React Hook Form (forms), Prisma + SQLite (orders/payments storage; easy to swap to Postgres later).
+
+YooKassa payments (API create payment with redirect confirmation), webhooks to finalize orders.
+
+next/image, next/font, sitemap/robots, og:image.
+
+ESLint + Prettier, Husky pre-commit.
+
+REPO OUTPUT
+
+Full folder tree and all files in code blocks (split logically by file path).
+
+A final README.md with one-command setup & testing steps.
+
+Include seed script to create the single product and variants (Player/Goalie, sizes).
+
+Provide design tokens (colors, spacing, shadows, radii, typography) and reference them consistently.
+
+BUSINESS & CONTENT REQUIREMENTS
+
+Brand & positioning: Ultra-premium, minimal, “performance engineering” look. Dark graphite + ice-silver accents, subtle gloss highlights, micro-motion. Avoid gimmicks.
+
+Product: “JRZ Pro Black DLC Blades.” Variants:
+
+Player blade — 10’ radius
+
+Goalie blade — 30’ radius
+
+Sizes as selectable options (placeholder list we can edit).
+
+Core copy to include (adapt elegantly, not bloated):
+
+“Nano surface • Mega performance”: DLC carbon nanoparticle coating → edge hardness & sharpness, mirror finish for superior glide, no deburring during sharpening, edge holds longer, impact-resistant.
+
+Precision & QC: stainless steel verified for blade manufacture; profiling tolerance ~0.001"; consistent profiles pair-to-pair.
+
+“Exceptional edge bite”: finer glide, confidence in turns, better stop response.
+
+Radius specs: Player 10’, Goalie 30’.
+
+Pages
+
+Home (3D hero, highlights, CTA to buy)
+
+Technology (DLC, mirror finish, QC, profiling tolerance)
+
+Player vs Goalie (explain 10’ vs 30’)
+
+Sizing (table + guidance)
+
+Sharpening & Care
+
+Reviews (static JSON now)
+
+Warranty & Returns
+
+Contact (Telegram/WhatsApp links + form validation)
+
+Shop / Product page (single premium product with variants)
+
+Cart (slide-over drawer + page)
+
+Checkout (server action → create YooKassa payment, then redirect)
+
+Order status / Thank you (reads our order by ID; shows paid/pending)
+
+Legal (Payment, Delivery, Privacy)
+
+RU/EN language switch persistently in nav.
+
+All pages must be available in RU and EN (RU default). Provide /src/messages/ru.json and en.json with all strings. Use next-intl with App Router [locale] segment.
+
+DESIGN & MOTION
+
+Look & feel
+
+Colors: #0b0b0d (bg), #0f1115 (elevations), #e5e7eb (text secondary), #f5f5f5 (text primary), accents #c0c0c0 (ice-silver) & subtle gold #bfa66b for highlights.
+
+Fonts: Cormorant Garamond (H1/H2) + Inter/Manrope (UI/body). Preload via next/font/google.
+
+Components: large imagery, glassy cards, thin separators, generous negative space.
+
+Framer Motion
+
+Page transitions using AnimatePresence (mode=wait); hero text reveal; hover micro-lift on product cards; cart drawer slide with spring.
+
+3D hero (react-three-fiber + drei)
+
+A minimalist blade model (procedural: thin extruded shape with slight curvature) with metallic black DLC material, HDRI environment, high roughness/metalness tuning to achieve mirror finish look.
+
+Slow yaw rotation, subtle camera parallax on scroll, fallbacks (if WebGL off → static hero image).
+
+Include /public/hdri/*.hdr and keep size small; use MeshReflectorMaterial or standard PBR with env map.
+
+Performance
+
+next/image with AVIF/WEBP, proper sizes; lazy + priority for hero; prefetch critical routes; Tailwind container widths; Lighthouse-friendly.
+
+Accessibility
+
+Keyboard nav, focus rings, aria-* on cart, sufficient contrast.
+
+DATA & STATE
+
+Prisma schema: Product, Variant, Order, OrderItem, Payment (stores paymentId, status, idempotenceKey, amount, currency, method, customerEmail, timestamps).
+
+Zustand for cart (persist to localStorage); cart → server action to create order + payment.
+
+Orders: create Order (pending) before redirect; store YooKassa paymentId in DB and attach orderId in metadata. Set return_url to /[locale]/order/thanks?orderId=<id>.
+
+YOOKASSA INTEGRATION (Option A: Redirect)
+
+What to implement
+
+Server SDK or direct HTTPS: choose stable @appigram/yookassa-node or HTTP fetch with proper headers. Use Idempotence-Key on create.
+
+Create payment (POST /payments): include amount.value (RUB), amount.currency = "RUB", capture: true, description, metadata: { orderId }, and
+confirmation: { type: "redirect", return_url: "<BASE_URL>/[locale]/order/thanks?orderId=" + orderId }.
+
+Payment methods are selected on YooKassa page; supports bank cards + SberPay, Mir Pay, FPS (SBP) when enabled in merchant account.
+
+Webhooks endpoint /api/webhooks/yookassa/[token]: receive payment.succeeded, payment.waiting_for_capture, payment.canceled. On succeeded, mark Payment and Order as paid. (Use a secret token path param + verify event shape; also fetch payment by paymentId server-side as a second check.)
+
+Get payment status on thank-you page by querying our DB; if pending, poll /api/payments/{orderId} which calls YooKassa GET /payments/{paymentId} and updates status.
+
+54-FZ receipts
+
+Assume merchant enables “Receipts from YooMoney/ЮKassa” service so receipts are issued & sent automatically (no itemized receipt object needed).
+
+If not enabled, include a toggle in .env.local YKS_SEND_RECEIPT=true and send receipt with one item (“JRZ Pro Black DLC Blades – <variant>”), quantity, RUB price, VAT code (e.g., vat_code: 1/2/3 placeholder), and customer email/phone.
+
+Env & config
+
+.env.local:
+
+BASE_URL=http://localhost:3000
+YKS_SHOP_ID=...
+YKS_SECRET_KEY=...
+YKS_WEBHOOK_TOKEN=long-random-string
+YKS_SEND_RECEIPT=false
+
+
+Use Basic Auth with shop_id:secret_key when calling YooKassa API.
+
+Generate Idempotence-Key via UUID per create attempt; persist it with the Order to avoid duplicates on retry.
+
+Testing
+
+Add /dev/test-payments page to create a 1 RUB test payment and exercise redirect/webhook.
+
+Document how to enable test mode in the YooKassa merchant cabinet and run through flows.
+
+ARCHITECTURE & FILES (high level)
+/src
+  /app
+    /(marketing)/[locale]/{page routes}
+    /(shop)/[locale]/shop/page.tsx
+    /(shop)/[locale]/product/[slug]/page.tsx
+    /(shop)/[locale]/cart/page.tsx
+    /(shop)/[locale]/checkout/page.tsx
+    /(shop)/[locale]/order/thanks/page.tsx
+    /api/checkout/route.ts           // POST create payment
+    /api/payments/[orderId]/route.ts // GET poll status
+    /api/webhooks/yookassa/[token]/route.ts // POST webhook
+    /robots.txt/route.ts
+    /sitemap.xml/route.ts
+    /layout.tsx  // sets font, theme, providers
+  /components   // Nav, Footer, Hero3D, BladeSpecs, CartDrawer, Buttons...
+  /hooks        // useCart (Zustand), useLocale
+  /lib          // yookassa client, prisma, i18n, formatters
+  /messages     // ru.json, en.json
+  /styles       // globals.css, tailwind
+/prisma
+  schema.prisma
+public/
+  images/ (sample product shots + placeholders)
+  hdri/ (small hdr for reflections)
+
+
+Key server files to produce (full code):
+
+src/lib/yookassa.ts: minimal client (fetch) or wrap @appigram/yookassa-node. Helper to createPayment, getPayment.
+
+src/app/api/checkout/route.ts:
+
+Validates cart & customer info.
+
+Creates Order + Payment (pending) in DB.
+
+Calls YooKassa create payment with Idempotence-Key.
+
+Returns confirmation_url to client.
+
+src/app/api/webhooks/yookassa/[token]/route.ts:
+
+Check token; parse JSON; switch on event → update Payment/Order.
+
+Also call getPayment(paymentId) to verify and synchronize.
+
+Respond 200 quickly; log idempotently.
+
+src/app/api/payments/[orderId]/route.ts: safe polling.
+
+src/app/(shop)/[locale]/checkout/page.tsx: server action calls /api/checkout, then JS redirects to YooKassa confirmation_url.
+
+src/app/(shop)/[locale]/order/thanks/page.tsx: server component reads orderId, fetches order status; shows “Paid” or “Processing”.
+
+Front-end features to show
+
+Home hero: R3F canvas with rotating black DLC blade, spec callouts; motion text reveal (“Nano surface / Mega performance”).
+
+Tech page: DLC diagram (SVG overlays), micro-scroll parallax.
+
+Product page: variant selector (Player/Goalie + size), sticky add-to-cart, spec chips (DLC, mirror finish, 10’/30’, ±0.001"), review stars.
+
+Cart drawer: updates in place; “Checkout” opens confirmation modal then POSTs.
+
+RU/EN switch in nav; persist selected locale via middleware.
+
+Copywriting
+
+Use my provided feature text verbatim where appropriate; otherwise compress into short, precise, high-end lines (no fluff). Provide RU translations in ru.json.
+
+Images
+
+Place sample placeholders in /public/images/ and clearly mark where I drop real photos later (/images/product/*). Provide at least: hero, macro DLC texture, profile, edge bite.
+
+QUALITY, SEO, ANALYTICS
+
+Metadata per page (title, description) in RU/EN; openGraph & twitter.
+
+OG image builder (simple SVG → PNG via @vercel/og or a static file).
+
+Schema.org Product JSON-LD with SKU/brand/price.
+
+Add Yandex.Metrica & Plausible snippets (env-based toggles).
+
+404 and 500 pages styled.
+
+DX & SCRIPTS
+
+npm run dev / build / start; prisma generate & prisma migrate dev; npm run seed to create product + variants.
+
+Husky hook runs lint & typecheck.
+
+DELIVERABLES CHECKLIST
+
+ Runs locally with npm i && npm run dev
+
+ RU default, EN secondary; all strings pulled from next-intl messages
+
+ Complete YooKassa flow: create → redirect → webhook → status page
+
+ 54-FZ handled via receipts service toggle or receipt object
+
+ 3D hero degrades gracefully to static image
+
+ Lighthouse ≥90 perf/accessibility on Home & Product
+
+START CODING NOW
+
+Scaffold the project.
+
+Print full code files in separate blocks with paths.
+
+End with README.md that documents: environment vars, how to get YooKassa creds, enabling payment methods (SberPay, Mir Pay, FPS), test flow, and deploy notes (Vercel/any Node host).
+
+Do not ask questions—assume reasonable defaults.
+
+Make sure the YooKassa code uses redirect confirmation and Idempotence-Key, saves paymentId, and finalizes orders on payment.succeeded.
+
+Notes & references (FYI)
+
+YooKassa payment process & redirect confirmation and webhooks guidance, plus test mode: see their developer docs. 
+Yookassa
++2
+Yookassa
++2
+
+Idempotence-Key header is required for safe retries. 
+Yookassa
+
+Payment methods available (cards, SberPay, Mir Pay, Faster Payments/FPS/SBP, etc.) and rates. 
+Yookassa
++3
+Yookassa
++3
+Yookassa
++3
+Yookassa
+
+54-FZ receipts: you can use Receipts from YooMoney (ЮKassa) to auto-issue/send receipts. 
+Yookassa
+
+next-intl App Router i18n setup. 
+Next Intl
++1
+
+Framer Motion page transitions (App Router tips). 
+LogRocket Blog

@@ -1,0 +1,83 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --dlc-bg: 11 11 13;
+    --dlc-elevation: 15 17 21;
+    --dlc-text-secondary: 229 231 235;
+    --dlc-text-primary: 245 245 245;
+    --dlc-silver: 192 192 192;
+    --dlc-gold: 191 166 107;
+  }
+
+  * {
+    @apply border-dlc-silver/10;
+  }
+
+  body {
+    @apply bg-dlc-bg text-dlc-text-primary antialiased;
+  }
+
+  ::selection {
+    @apply bg-dlc-silver/20 text-dlc-text-primary;
+  }
+
+  /* Scrollbar styling */
+  ::-webkit-scrollbar {
+    @apply w-2;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-dlc-elevation;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-dlc-silver/20 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-dlc-silver/30;
+  }
+}
+
+@layer components {
+  .glass {
+    @apply bg-dlc-elevation/50 backdrop-blur-md border border-dlc-silver/10;
+  }
+
+  .glass-hover {
+    @apply hover:bg-dlc-elevation/70 hover:border-dlc-silver/20 transition-all duration-300;
+  }
+
+  .text-gradient {
+    @apply bg-gradient-to-r from-dlc-silver to-dlc-gold bg-clip-text text-transparent;
+  }
+
+  .shimmer {
+    @apply relative overflow-hidden;
+  }
+
+  .shimmer::before {
+    @apply absolute inset-0 -translate-x-full;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(192, 192, 192, 0.1),
+      transparent
+    );
+    animation: shimmer 2s infinite;
+    content: '';
+  }
+
+  @keyframes shimmer {
+    100% {
+      transform: translateX(100%);
+    }
+  }
+
+  .focus-ring {
+    @apply focus:outline-none focus:ring-2 focus:ring-dlc-silver/50 focus:ring-offset-2 focus:ring-offset-dlc-bg;
+  }
+}

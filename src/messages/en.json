@@ -1,0 +1,330 @@
+{
+  "common": {
+    "brand": "JRZ Pro Black DLC",
+    "tagline": "Nano surface • Mega performance",
+    "currency": "₽",
+    "addToCart": "Add to Cart",
+    "buy": "Buy Now",
+    "close": "Close",
+    "loading": "Loading...",
+    "email": "Email",
+    "phone": "Phone",
+    "quantity": "Quantity",
+    "total": "Total",
+    "subtotal": "Subtotal",
+    "shipping": "Shipping",
+    "free": "Free",
+    "continue": "Continue",
+    "back": "Back",
+    "viewAll": "View All",
+    "learnMore": "Learn More",
+    "contactUs": "Contact Us"
+  },
+  "nav": {
+    "home": "Home",
+    "technology": "Technology",
+    "playerVsGoalie": "Player vs Goalie",
+    "sizing": "Sizing",
+    "sharpening": "Sharpening & Care",
+    "reviews": "Reviews",
+    "warranty": "Warranty & Returns",
+    "contact": "Contact",
+    "shop": "Shop",
+    "cart": "Cart",
+    "language": "Language"
+  },
+  "home": {
+    "hero": {
+      "title": "Revolution in Hockey Performance",
+      "subtitle": "DLC nanoparticle coating for unmatched edge performance",
+      "cta": "Shop Now"
+    },
+    "features": {
+      "title": "Engineering Excellence",
+      "dlc": {
+        "title": "DLC Coating",
+        "description": "Carbon nanoparticle coating for maximum edge hardness and sharpness"
+      },
+      "precision": {
+        "title": "±0.001\" Precision",
+        "description": "Exceptional profiling tolerance for perfect pair consistency"
+      },
+      "edge": {
+        "title": "Superior Edge Bite",
+        "description": "Finer glide, confidence in turns, better stop response"
+      },
+      "durability": {
+        "title": "Long-lasting",
+        "description": "Edge holds longer, impact-resistant construction"
+      }
+    },
+    "cta": {
+      "title": "Ready for Excellence?",
+      "button": "Choose Your Blades"
+    }
+  },
+  "technology": {
+    "title": "DLC Technology",
+    "hero": {
+      "title": "The Science of Performance",
+      "subtitle": "Diamond-Like Carbon coating changes the game"
+    },
+    "sections": {
+      "coating": {
+        "title": "DLC Nanoparticle Coating",
+        "description": "Our proprietary carbon nanoparticle coating delivers unmatched edge hardness and sharpness. The mirror finish creates superior glide while the coating prevents deburring during sharpening."
+      },
+      "precision": {
+        "title": "Precision Manufacturing",
+        "description": "Each blade is crafted from verified stainless steel with profiling tolerance of ~0.001\". This ensures perfect consistency between pairs for optimal balance and performance."
+      },
+      "performance": {
+        "title": "Performance Features",
+        "items": [
+          "Mirror finish for minimal friction",
+          "Superior edge hardness and retention",
+          "No deburring during sharpening",
+          "Impact-resistant construction",
+          "Consistent profiles pair-to-pair"
+        ]
+      }
+    }
+  },
+  "playerVsGoalie": {
+    "title": "Player vs Goalie",
+    "hero": {
+      "title": "Choose Your Style",
+      "subtitle": "Optimized for your position on ice"
+    },
+    "player": {
+      "title": "Player Blades",
+      "radius": "10' Radius",
+      "description": "Engineered for agility and speed. The 10' radius provides the perfect balance between stability and maneuverability for forwards and defensemen.",
+      "benefits": [
+        "Quick turns and transitions",
+        "Optimal agility",
+        "Explosive acceleration",
+        "Precise edge control"
+      ]
+    },
+    "goalie": {
+      "title": "Goalie Blades",
+      "radius": "30' Radius",
+      "description": "Built for stability and lateral movement. The 30' radius maximizes ice contact for superior balance and push power.",
+      "benefits": [
+        "Maximum stability",
+        "Superior lateral pushes",
+        "Increased contact area",
+        "Enhanced recovery power"
+      ]
+    }
+  },
+  "sizing": {
+    "title": "Sizing Guide",
+    "hero": {
+      "title": "Find Your Perfect Fit",
+      "subtitle": "Precise measurements for optimal performance"
+    },
+    "table": {
+      "size": "Size",
+      "length": "Length (mm)",
+      "shoeSize": "Shoe Size",
+      "availability": "Availability"
+    },
+    "guide": {
+      "title": "How to Measure",
+      "steps": [
+        "Remove current blades from skates",
+        "Measure from toe to heel in millimeters",
+        "Select the closest available size",
+        "When in doubt, size up"
+      ]
+    }
+  },
+  "sharpening": {
+    "title": "Sharpening & Care",
+    "hero": {
+      "title": "Maintain Excellence",
+      "subtitle": "Proper care for lasting performance"
+    },
+    "sections": {
+      "frequency": {
+        "title": "Sharpening Frequency",
+        "description": "Thanks to the DLC coating, our blades require sharpening 50% less often than standard blades. Most players sharpen every 15-20 hours of ice time."
+      },
+      "technique": {
+        "title": "Sharpening Technique",
+        "tips": [
+          "Use standard sharpening equipment",
+          "Maintain 1/2\" or 5/8\" hollow for players",
+          "Goalies typically prefer 3/8\" or 1/2\"",
+          "DLC coating prevents deburring"
+        ]
+      },
+      "care": {
+        "title": "Daily Care",
+        "tips": [
+          "Wipe blades after each use",
+          "Store with blade guards",
+          "Avoid walking on hard surfaces",
+          "Inspect regularly for damage"
+        ]
+      }
+    }
+  },
+  "reviews": {
+    "title": "Reviews",
+    "hero": {
+      "title": "What the Pros Say",
+      "subtitle": "Real results from real players"
+    },
+    "stats": {
+      "rating": "Average Rating",
+      "reviews": "Reviews"
+    }
+  },
+  "warranty": {
+    "title": "Warranty & Returns",
+    "hero": {
+      "title": "Your Confidence Guaranteed",
+      "subtitle": "We stand behind our product"
+    },
+    "sections": {
+      "warranty": {
+        "title": "1-Year Warranty",
+        "description": "All JRZ Pro Black DLC blades come with a one-year warranty against manufacturing defects. This covers coating issues, structural integrity, and profile consistency."
+      },
+      "returns": {
+        "title": "30-Day Returns",
+        "description": "Not completely satisfied? Return unused blades within 30 days for a full refund. Blades must be in original condition with no mounting or sharpening marks."
+      },
+      "shipping": {
+        "title": "Russia-wide Shipping",
+        "description": "Free shipping throughout Russia. Standard delivery takes 5-7 business days. Express shipping available for an additional fee."
+      }
+    }
+  },
+  "contact": {
+    "title": "Contact",
+    "hero": {
+      "title": "Get in Touch",
+      "subtitle": "We're here to help"
+    },
+    "form": {
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone",
+      "message": "Message",
+      "send": "Send Message"
+    },
+    "info": {
+      "title": "Direct Contact",
+      "telegram": "Telegram",
+      "whatsapp": "WhatsApp",
+      "email": "Support Email"
+    }
+  },
+  "shop": {
+    "title": "Shop",
+    "product": {
+      "features": [
+        "DLC nanoparticle coating",
+        "Mirror finish",
+        "±0.001\" precision",
+        "Impact-resistant"
+      ],
+      "variant": {
+        "type": "Type",
+        "size": "Size",
+        "player": "Player (10')",
+        "goalie": "Goalie (30')"
+      },
+      "stock": "In stock",
+      "outOfStock": "Out of stock"
+    }
+  },
+  "cart": {
+    "title": "Shopping Cart",
+    "empty": "Your cart is empty",
+    "item": "item",
+    "items": "items",
+    "remove": "Remove",
+    "checkout": "Checkout",
+    "continueShopping": "Continue Shopping"
+  },
+  "checkout": {
+    "title": "Checkout",
+    "contact": {
+      "title": "Contact Information",
+      "email": "Email address",
+      "phone": "Phone number"
+    },
+    "payment": {
+      "title": "Payment",
+      "description": "You will be redirected to secure YooKassa payment page",
+      "methods": "We accept cards, SberPay, Mir Pay, FPS"
+    },
+    "summary": {
+      "title": "Order Summary",
+      "items": "Items",
+      "shipping": "Shipping",
+      "total": "Total"
+    },
+    "submit": "Proceed to Payment",
+    "processing": "Processing..."
+  },
+  "order": {
+    "thanks": {
+      "title": "Thank you for your order!",
+      "paid": {
+        "title": "Payment Received",
+        "description": "Your order #{orderId} has been successfully paid. We'll send a confirmation to your email."
+      },
+      "pending": {
+        "title": "Processing Payment",
+        "description": "Your order #{orderId} is being processed. Please wait..."
+      },
+      "failed": {
+        "title": "Payment Failed",
+        "description": "Unfortunately, the payment was not completed. Please try again."
+      }
+    }
+  },
+  "footer": {
+    "sections": {
+      "product": {
+        "title": "Product",
+        "technology": "Technology",
+        "playerVsGoalie": "Player vs Goalie",
+        "sizing": "Sizing",
+        "sharpening": "Sharpening"
+      },
+      "support": {
+        "title": "Support",
+        "warranty": "Warranty",
+        "returns": "Returns",
+        "contact": "Contact",
+        "reviews": "Reviews"
+      },
+      "legal": {
+        "title": "Legal",
+        "payment": "Payment Terms",
+        "delivery": "Delivery Terms",
+        "privacy": "Privacy Policy"
+      }
+    },
+    "copyright": "© 2024 JRZ Pro Black DLC. All rights reserved."
+  },
+  "seo": {
+    "home": {
+      "title": "JRZ Pro Black DLC - Premium Hockey Blades with DLC Coating",
+      "description": "Revolutionary hockey blades with carbon nanoparticle coating. Mirror finish, superior edge hardness, ±0.001\" precision. Shipping throughout Russia."
+    }
+  },
+  "errors": {
+    "general": "An error occurred. Please try again.",
+    "required": "This field is required",
+    "email": "Please enter a valid email",
+    "phone": "Please enter a valid phone number"
+  }
+}
