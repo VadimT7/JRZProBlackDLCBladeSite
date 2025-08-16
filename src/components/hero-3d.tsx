@@ -11,9 +11,35 @@ export function Hero3D() {
   const t = useTranslations('home.hero');
   const [isLoaded, setIsLoaded] = React.useState(false);
   const [isClient, setIsClient] = React.useState(false);
+  const [hasError, setHasError] = React.useState(false);
+  const containerRef = React.useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {
+    // Ensure the component only renders on the client
     setIsClient(true);
+    
+    // Add a small delay to ensure proper hydration
+    const timer = setTimeout(() => {
+      if (containerRef.current) {
+        // Force a reflow to ensure proper dimensions
+        containerRef.current.getBoundingClientRect();
+      }
+    }, 100);
+    
+    return () => clearTimeout(timer);
+  }, []);
+
+  // Handle WebGL errors
+  React.useEffect(() => {
+    const handleError = (event: ErrorEvent) => {
+      if (event.message.includes('WebGL') || event.message.includes('THREE')) {
+        console.error('WebGL Error:', event.message);
+        setHasError(true);
+      }
+    };
+
+    window.addEventListener('error', handleError);
+    return () => window.removeEventListener('error', handleError);
   }, []);
 
   if (!isClient) {
@@ -27,24 +53,40 @@ export function Hero3D() {
   }
 
   return (
-    <div className="relative h-screen w-full overflow-hidden">
-      {/* Background layer to ensure it never goes white */}
-      <div className="absolute inset-0 bg-gradient-to-b from-dlc-bg via-dlc-bg to-dlc-elevation" />
-      
+    <div className="relative h-screen w-full overflow-hidden bg-gradient-to-b from-dlc-bg via-dlc-bg to-dlc-elevation">
       {/* 3D Canvas */}
-      <div className="absolute inset-0">
+      <div ref={containerRef} className="absolute inset-0 bg-dlc-bg">
         <React.Suspense fallback={
-          <div className="absolute inset-0 flex items-center justify-center">
+          <div className="absolute inset-0 flex items-center justify-center bg-dlc-bg">
             <div className="shimmer h-32 w-96 bg-dlc-elevation rounded-lg" />
           </div>
         }>
-          <ThreeScene onCreated={() => setIsLoaded(true)} />
+          {!hasError ? (
+            <ThreeScene 
+              onCreated={() => {
+                setIsLoaded(true);
+                setHasError(false);
+              }} 
+            />
+          ) : (
+            <div className="absolute inset-0 flex items-center justify-center bg-dlc-bg">
+              <div className="text-dlc-text-secondary text-center">
+                <p>Unable to load 3D scene</p>
+                <button 
+                  onClick={() => setHasError(false)}
+                  className="mt-4 px-4 py-2 bg-dlc-elevation rounded-lg hover:bg-dlc-silver/10 transition-colors"
+                >
+                  Retry
+                </button>
+              </div>
+            </div>
+          )}
         </React.Suspense>
       </div>
 
       {/* Fallback for loading */}
-      {!isLoaded && (
-        <div className="absolute inset-0 flex items-center justify-center">
+      {!isLoaded && !hasError && (
+        <div className="absolute inset-0 flex items-center justify-center bg-dlc-bg pointer-events-none">
           <div className="shimmer h-32 w-96 bg-dlc-elevation rounded-lg" />
         </div>
       )}

@@ -87,8 +87,8 @@ function SceneSetup() {
         />
       </mesh>
       
-      {/* Fog for depth - matching the background color */}
-      <fog attach="fog" args={['#0b0b0d', 5, 20]} />
+      {/* Fog for depth */}
+      <fog attach="fog" args={['#000000', 5, 20]} />
     </>
   );
 }
@@ -98,23 +98,71 @@ interface ThreeSceneProps {
 }
 
 export default function ThreeScene({ onCreated }: ThreeSceneProps) {
+  const [error, setError] = React.useState(false);
+  const canvasRef = React.useRef<HTMLCanvasElement>(null);
+
+  const handleContextLost = React.useCallback((event: any) => {
+    event.preventDefault();
+    console.warn('WebGL context lost, attempting to restore...');
+    setError(true);
+    // Attempt to restore context after a short delay
+    setTimeout(() => {
+      setError(false);
+    }, 100);
+  }, []);
+
+  const handleContextRestored = React.useCallback(() => {
+    console.log('WebGL context restored');
+    setError(false);
+  }, []);
+
+  const handleCreated = React.useCallback((state: any) => {
+    // Add event listeners for context loss/restoration
+    const gl = state.gl;
+    const canvas = gl.domElement;
+    
+    canvas.addEventListener('webglcontextlost', handleContextLost, false);
+    canvas.addEventListener('webglcontextrestored', handleContextRestored, false);
+    
+    // Force initial render
+    state.gl.render(state.scene, state.camera);
+    
+    // Notify parent component
+    onCreated?.();
+    
+    // Cleanup function
+    return () => {
+      canvas.removeEventListener('webglcontextlost', handleContextLost);
+      canvas.removeEventListener('webglcontextrestored', handleContextRestored);
+    };
+  }, [onCreated, handleContextLost, handleContextRestored]);
+
+  if (error) {
+    return (
+      <div className="absolute inset-0 bg-dlc-bg flex items-center justify-center">
+        <div className="text-dlc-text-secondary">Loading 3D scene...</div>
+      </div>
+    );
+  }
+
   return (
     <Canvas
+      ref={canvasRef}
       shadows
       camera={{ position: [0, 0, 4], fov: 50 }}
-      onCreated={(state) => {
-        // Ensure the renderer has a transparent background
-        state.gl.setClearColor(0x000000, 0);
-        onCreated?.();
-      }}
-      style={{ background: 'transparent' }}
+      onCreated={handleCreated}
+      style={{ background: '#0a0a0a' }}
       gl={{ 
         antialias: true,
-        alpha: true,
-        premultipliedAlpha: false,
         toneMapping: THREE.ACESFilmicToneMapping,
-        toneMappingExposure: 1.2
+        toneMappingExposure: 1.2,
+        preserveDrawingBuffer: true,
+        powerPreference: 'high-performance',
+        failIfMajorPerformanceCaveat: false,
+        alpha: true
       }}
+      frameloop="always"
+      dpr={[1, 2]}
     >
       <SceneSetup />
       <Blade />
