@@ -13,6 +13,10 @@ export function GET() {
     '/warranty',
     '/contact',
     '/shop',
+    '/legal',
+    '/legal/payment',
+    '/legal/delivery',
+    '/legal/privacy',
   ];
 
   const urls = locales.flatMap(locale =>

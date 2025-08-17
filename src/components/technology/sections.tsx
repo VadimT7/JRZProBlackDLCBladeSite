@@ -16,12 +16,12 @@ export function TechnologySections() {
   ];
 
   const specs = [
-    { label: 'DLC Hardness', value: '2000-3000 HV', detail: 'Vickers Scale' },
-    { label: 'Coating Thickness', value: '2-4 μm', detail: 'Microns' },
-    { label: 'Friction Coefficient', value: '0.1-0.2', detail: 'Against Ice' },
-    { label: 'Temperature Resistance', value: '400°C', detail: 'Maximum' },
-    { label: 'Corrosion Protection', value: '1000+ hrs', detail: 'Salt Spray Test' },
-    { label: 'Edge Retention', value: '10x', detail: 'vs Traditional Steel' },
+    { label: t('specifications.dlcHardness.label'), value: '2000-3000 HV', detail: t('specifications.dlcHardness.detail') },
+    { label: t('specifications.coatingThickness.label'), value: '2-4 μm', detail: t('specifications.coatingThickness.detail') },
+    { label: t('specifications.frictionCoefficient.label'), value: '0.1-0.2', detail: t('specifications.frictionCoefficient.detail') },
+    { label: t('specifications.temperatureResistance.label'), value: '400°C', detail: t('specifications.temperatureResistance.detail') },
+    { label: t('specifications.corrosionProtection.label'), value: '1000+ hrs', detail: t('specifications.corrosionProtection.detail') },
+    { label: t('specifications.edgeRetention.label'), value: '10x', detail: t('specifications.edgeRetention.detail') },
   ];
 
   return (
@@ -39,8 +39,7 @@ export function TechnologySections() {
             {t('coating.title')}
           </h2>
           <p className="text-xl text-dlc-text-secondary max-w-3xl mx-auto leading-relaxed">
-            Engineered with aerospace-grade Diamond-Like Carbon coating technology, 
-            each blade represents the pinnacle of metallurgical innovation.
+            {t('introduction')}
           </p>
         </motion.div>
 
@@ -57,7 +56,7 @@ export function TechnologySections() {
             <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               <div>
                 <h3 className="text-3xl font-cormorant font-bold mb-4 text-gradient">
-                  Molecular Perfection
+                  {t('molecular.title')}
                 </h3>
                 <p className="text-lg text-dlc-text-secondary mb-6 leading-relaxed">
                   {t('coating.description')}
@@ -66,15 +65,15 @@ export function TechnologySections() {
                   <div className="flex items-center gap-4">
                     <Layers className="w-8 h-8 text-dlc-silver" />
                     <div>
-                      <h4 className="font-semibold">Multi-Layer Technology</h4>
-                      <p className="text-sm text-dlc-text-secondary">Proprietary bonding process ensures lifetime durability</p>
+                      <h4 className="font-semibold">{t('molecular.multiLayer.title')}</h4>
+                      <p className="text-sm text-dlc-text-secondary">{t('molecular.multiLayer.description')}</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-4">
                     <Sparkles className="w-8 h-8 text-dlc-gold" />
                     <div>
-                      <h4 className="font-semibold">Carbon Crystal Structure</h4>
-                      <p className="text-sm text-dlc-text-secondary">Diamond-hard surface with silk-smooth glide</p>
+                      <h4 className="font-semibold">{t('molecular.carbonCrystal.title')}</h4>
+                      <p className="text-sm text-dlc-text-secondary">{t('molecular.carbonCrystal.description')}</p>
                     </div>
                   </div>
                 </div>
@@ -100,7 +99,7 @@ export function TechnologySections() {
           className="mb-20"
         >
           <h3 className="text-3xl font-cormorant font-bold text-center mb-10">
-            Technical Specifications
+            {t('specifications.title')}
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {specs.map((spec, index) => (
@@ -140,8 +139,8 @@ export function TechnologySections() {
                     >
                       ±0.001&quot;
                     </motion.div>
-                    <p className="text-xl text-dlc-text-secondary mb-2">Manufacturing Tolerance</p>
-                    <p className="text-sm text-dlc-text-secondary">Swiss-Grade Precision</p>
+                    <p className="text-xl text-dlc-text-secondary mb-2">{t('manufacturing.tolerance')}</p>
+                    <p className="text-sm text-dlc-text-secondary">{t('manufacturing.grade')}</p>
                   </div>
                 </div>
                 <div className="absolute -top-4 -right-4 w-24 h-24 bg-dlc-gold/20 rounded-full blur-2xl" />
@@ -158,15 +157,15 @@ export function TechnologySections() {
               <div className="space-y-3">
                 <div className="flex items-center gap-3">
                   <CheckCircle2 className="w-5 h-5 text-dlc-silver" />
-                  <span>CNC machined to aerospace standards</span>
+                  <span>{t('manufacturing.features.0')}</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <CheckCircle2 className="w-5 h-5 text-dlc-silver" />
-                  <span>Laser-measured profile accuracy</span>
+                  <span>{t('manufacturing.features.1')}</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <CheckCircle2 className="w-5 h-5 text-dlc-silver" />
-                  <span>Hand-inspected by master craftsmen</span>
+                  <span>{t('manufacturing.features.2')}</span>
                 </div>
               </div>
             </div>
@@ -215,11 +214,10 @@ export function TechnologySections() {
             <div className="relative z-10">
               <Award className="w-16 h-16 text-dlc-gold mx-auto mb-6" />
               <h3 className="text-3xl font-cormorant font-bold mb-4">
-                The Ultimate Edge
+                {t('ultimateEdge.title')}
               </h3>
               <p className="text-lg text-dlc-text-secondary max-w-2xl mx-auto">
-                When precision matters and performance is non-negotiable, 
-                JRZ Pro Black DLC delivers the competitive advantage that separates champions from the rest.
+                {t('ultimateEdge.description')}
               </p>
             </div>
           </div>

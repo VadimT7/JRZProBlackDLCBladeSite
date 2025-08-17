@@ -9,7 +9,7 @@ import { ShoppingCart, Star } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { formatPrice } from '@/lib/utils';
 import { useCartStore } from '@/lib/cart-store';
-import type { Product, Variant } from '@prisma/client';
+// import type { Product, Variant } from '@prisma/client'; // Types used in ProductWithVariants
 
 type ProductWithVariants = {
   id: string;

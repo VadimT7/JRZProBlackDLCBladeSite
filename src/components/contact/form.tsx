@@ -33,7 +33,7 @@ export function ContactForm() {
     resolver: zodResolver(contactSchema),
   });
 
-  const onSubmit = async (data: ContactForm) => {
+  const onSubmit = async () => {
     setIsSubmitting(true);
     // Simulate form submission
     await new Promise(resolve => setTimeout(resolve, 2000));

@@ -7,14 +7,20 @@ import { motion } from 'framer-motion';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { CreditCard, Loader2 } from 'lucide-react';
+import { Loader2, Package } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useCartStore } from '@/lib/cart-store';
 import { formatPrice } from '@/lib/utils';
 
 const checkoutSchema = z.object({
+  fullName: z.string().min(2),
   email: z.string().email(),
-  phone: z.string().optional(),
+  phone: z.string().min(10),
+  address: z.string().min(5),
+  city: z.string().min(2),
+  region: z.string().min(2),
+  postalCode: z.string().min(5),
+  country: z.string().default('Russia'),
 });
 
 type CheckoutForm = z.infer<typeof checkoutSchema>;
@@ -50,6 +56,49 @@ export default function CheckoutPage() {
     setError('');
 
     try {
+      // Temporary: Submit order for manual processing
+      const response = await fetch('/api/orders/manual', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ...data,
+          items: items.map(item => ({
+            variantId: item.variantId,
+            quantity: item.quantity,
+          })),
+          locale,
+          totalAmount: totalPrice,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Order submission failed');
+      }
+
+      const result = await response.json();
+      
+      if (result.orderId) {
+        // Clear cart
+        clearCart();
+        // Redirect to thank you page
+        router.push(`/${locale}/order/thanks?orderId=${result.orderId}&manual=true`);
+      } else {
+        throw new Error('Failed to create order');
+      }
+    } catch {
+      setError(tErrors('general'));
+      setIsProcessing(false);
+    }
+  };
+
+  /* Original YooKassa payment flow - commented out for temporary manual processing
+  const onSubmitWithPayment = async (data: CheckoutForm) => {
+    setIsProcessing(true);
+    setError('');
+
+    try {
       const response = await fetch('/api/checkout', {
         method: 'POST',
         headers: {
@@ -79,11 +128,12 @@ export default function CheckoutPage() {
       } else {
         throw new Error('No payment URL received');
       }
-    } catch (err) {
+    } catch {
       setError(tErrors('general'));
       setIsProcessing(false);
     }
   };
+  */
 
   return (
     <div className="min-h-screen py-24">
@@ -106,6 +156,20 @@ export default function CheckoutPage() {
                   <div className="space-y-4">
                     <div>
                       <label className="block text-sm font-medium mb-2">
+                        {t('contact.fullName')}
+                      </label>
+                      <input
+                        type="text"
+                        {...register('fullName')}
+                        className="w-full px-4 py-2 bg-dlc-elevation border border-dlc-silver/20 rounded-lg focus:border-dlc-silver focus:outline-none"
+                      />
+                      {errors.fullName && (
+                        <p className="mt-1 text-sm text-red-500">{tErrors('required')}</p>
+                      )}
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium mb-2">
                         {t('contact.email')}
                       </label>
                       <input
@@ -121,7 +185,7 @@ export default function CheckoutPage() {
 
                     <div>
                       <label className="block text-sm font-medium mb-2">
-                        {t('contact.phone')} ({tCommon('optional')})
+                        {t('contact.phone')}
                       </label>
                       <input
                         type="tel"
@@ -129,10 +193,103 @@ export default function CheckoutPage() {
                         className="w-full px-4 py-2 bg-dlc-elevation border border-dlc-silver/20 rounded-lg focus:border-dlc-silver focus:outline-none"
                         placeholder="+7 (999) 123-45-67"
                       />
+                      {errors.phone && (
+                        <p className="mt-1 text-sm text-red-500">{tErrors('required')}</p>
+                      )}
                     </div>
                   </div>
                 </div>
 
+                <div className="glass p-6 rounded-lg">
+                  <h2 className="text-xl font-semibold mb-4">{t('shipping.title')}</h2>
+                  
+                  <div className="space-y-4">
+                    <div>
+                      <label className="block text-sm font-medium mb-2">
+                        {t('shipping.address')}
+                      </label>
+                      <input
+                        type="text"
+                        {...register('address')}
+                        className="w-full px-4 py-2 bg-dlc-elevation border border-dlc-silver/20 rounded-lg focus:border-dlc-silver focus:outline-none"
+                      />
+                      {errors.address && (
+                        <p className="mt-1 text-sm text-red-500">{tErrors('required')}</p>
+                      )}
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-sm font-medium mb-2">
+                          {t('shipping.city')}
+                        </label>
+                        <input
+                          type="text"
+                          {...register('city')}
+                          className="w-full px-4 py-2 bg-dlc-elevation border border-dlc-silver/20 rounded-lg focus:border-dlc-silver focus:outline-none"
+                        />
+                        {errors.city && (
+                          <p className="mt-1 text-sm text-red-500">{tErrors('required')}</p>
+                        )}
+                      </div>
+
+                      <div>
+                        <label className="block text-sm font-medium mb-2">
+                          {t('shipping.region')}
+                        </label>
+                        <input
+                          type="text"
+                          {...register('region')}
+                          className="w-full px-4 py-2 bg-dlc-elevation border border-dlc-silver/20 rounded-lg focus:border-dlc-silver focus:outline-none"
+                        />
+                        {errors.region && (
+                          <p className="mt-1 text-sm text-red-500">{tErrors('required')}</p>
+                        )}
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-sm font-medium mb-2">
+                          {t('shipping.postalCode')}
+                        </label>
+                        <input
+                          type="text"
+                          {...register('postalCode')}
+                          className="w-full px-4 py-2 bg-dlc-elevation border border-dlc-silver/20 rounded-lg focus:border-dlc-silver focus:outline-none"
+                        />
+                        {errors.postalCode && (
+                          <p className="mt-1 text-sm text-red-500">{tErrors('required')}</p>
+                        )}
+                      </div>
+
+                      <div>
+                        <label className="block text-sm font-medium mb-2">
+                          {t('shipping.country')}
+                        </label>
+                        <input
+                          type="text"
+                          {...register('country')}
+                          className="w-full px-4 py-2 bg-dlc-elevation border border-dlc-silver/20 rounded-lg focus:border-dlc-silver focus:outline-none"
+                          defaultValue="Russia"
+                          disabled
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Temporary manual order info - replace with payment section when YooKassa is ready */}
+                <div className="glass p-6 rounded-lg">
+                  <h2 className="text-xl font-semibold mb-4">{t('manualOrder.title')}</h2>
+                  <p className="text-dlc-text-secondary mb-4">{t('manualOrder.description')}</p>
+                  <div className="flex items-start space-x-2 text-sm text-dlc-text-secondary bg-dlc-elevation/50 p-3 rounded-lg">
+                    <Package className="w-4 h-4 mt-0.5 flex-shrink-0" />
+                    <span>{t('manualOrder.note')}</span>
+                  </div>
+                </div>
+
+                {/* Original payment section - commented out for temporary manual processing
                 <div className="glass p-6 rounded-lg">
                   <h2 className="text-xl font-semibold mb-4">{t('payment.title')}</h2>
                   <p className="text-dlc-text-secondary mb-4">{t('payment.description')}</p>
@@ -141,6 +298,7 @@ export default function CheckoutPage() {
                     <span>{t('payment.methods')}</span>
                   </div>
                 </div>
+                */}
 
                 {error && (
                   <div className="p-4 bg-red-500/10 border border-red-500/20 rounded-lg text-red-500">
@@ -157,10 +315,10 @@ export default function CheckoutPage() {
                   {isProcessing ? (
                     <>
                       <Loader2 className="w-5 h-5 mr-2 animate-spin" />
-                      {t('processing')}
+                      {t('submitting')}
                     </>
                   ) : (
-                    t('submit')
+                    t('submitOrder')
                   )}
                 </Button>
               </form>

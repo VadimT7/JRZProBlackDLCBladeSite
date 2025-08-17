@@ -37,7 +37,8 @@ export async function POST(
     console.log('YooKassa webhook:', body.type, body.object.id);
 
     // Extract payment info
-    const { id: paymentId, status, metadata } = body.object;
+    const { id: paymentId, metadata } = body.object;
+    // const status = body.object.status; // Status available but not used directly
     const orderId = metadata?.orderId;
 
     if (!orderId) {

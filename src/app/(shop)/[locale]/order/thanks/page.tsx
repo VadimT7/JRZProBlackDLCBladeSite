@@ -14,11 +14,12 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 interface PageProps {
   searchParams: Promise<{
     orderId?: string;
+    manual?: string;
   }>;
 }
 
 export default async function OrderThanksPage({ searchParams }: PageProps) {
-  const { orderId } = await searchParams;
+  const { orderId, manual } = await searchParams;
 
   if (!orderId) {
     return (
@@ -33,7 +34,7 @@ export default async function OrderThanksPage({ searchParams }: PageProps) {
   return (
     <div className="min-h-screen py-24">
       <div className="container mx-auto px-4">
-        <OrderStatus orderId={orderId} />
+        <OrderStatus orderId={orderId} isManual={manual === 'true'} />
       </div>
     </div>
   );

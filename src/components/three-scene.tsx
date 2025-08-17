@@ -101,7 +101,7 @@ export default function ThreeScene({ onCreated }: ThreeSceneProps) {
   const [error, setError] = React.useState(false);
   const canvasRef = React.useRef<HTMLCanvasElement>(null);
 
-  const handleContextLost = React.useCallback((event: any) => {
+  const handleContextLost = React.useCallback((event: Event) => {
     event.preventDefault();
     console.warn('WebGL context lost, attempting to restore...');
     setError(true);

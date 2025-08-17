@@ -1,6 +1,5 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { getTranslations } from 'next-intl/server';
 import { prisma } from '@/lib/prisma';
 import { ProductDetail } from '@/components/shop/product-detail';
 

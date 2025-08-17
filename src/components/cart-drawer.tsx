@@ -7,7 +7,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X, Minus, Plus, ShoppingBag } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useCartStore } from '@/lib/cart-store';
-import { formatPrice, cn } from '@/lib/utils';
+import { formatPrice } from '@/lib/utils';
 
 export function CartDrawer() {
   const t = useTranslations('cart');

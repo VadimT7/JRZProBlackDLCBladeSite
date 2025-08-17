@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { useTranslations } from 'next-intl';
+// import { useTranslations } from 'next-intl'; // Not used directly in this component
 import { ShoppingCart, Star, Shield, Truck, RotateCcw } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useCartStore } from '@/lib/cart-store';
@@ -35,7 +35,7 @@ interface ProductDetailProps {
 }
 
 export function ProductDetail({ product }: ProductDetailProps) {
-  const t = useTranslations('shop.product');
+  // const t = useTranslations('shop.product'); // Translation not used directly
   const addItem = useCartStore(state => state.addItem);
   const [selectedVariant, setSelectedVariant] = useState<ProductWithVariants['variants'][0] | null>(null);
   const [selectedImage, setSelectedImage] = useState(0);

@@ -3,11 +3,46 @@
 import { useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { motion } from 'framer-motion';
-import { CheckCircle2, Clock, XCircle, Loader2 } from 'lucide-react';
+import { CheckCircle2, Clock, XCircle, Loader2, Package } from 'lucide-react';
 import { formatPrice } from '@/lib/utils';
+
+// Separate component to avoid hooks rules violation
+function OrderDetailsSection({ orderData }: { orderData: OrderData }) {
+  const t = useTranslations('common');
+  
+  return (
+    <>
+      <h2 className="text-xl font-semibold mb-4">{t('orderDetails') || 'Order Details'}</h2>
+      
+      <div className="space-y-4 mb-6">
+        {orderData.items.map((item, index) => (
+          <div key={index} className="flex justify-between">
+            <div>
+              <p className="font-medium">{item.variant.product.name}</p>
+              <p className="text-sm text-dlc-text-secondary">
+                {item.variant.type} • {item.variant.size} × {item.quantity}
+              </p>
+            </div>
+            <p className="font-medium">
+              {formatPrice(item.price * item.quantity)}
+            </p>
+          </div>
+        ))}
+      </div>
+
+      <div className="border-t border-dlc-silver/10 pt-4">
+        <div className="flex justify-between text-lg font-semibold">
+          <span>Total</span>
+          <span>{formatPrice(orderData.amount)}</span>
+        </div>
+      </div>
+    </>
+  );
+}
 
 interface OrderStatusProps {
   orderId: string;
+  isManual?: boolean;
 }
 
 interface OrderData {
@@ -28,7 +63,7 @@ interface OrderData {
   }>;
 }
 
-export function OrderStatus({ orderId }: OrderStatusProps) {
+export function OrderStatus({ orderId, isManual = false }: OrderStatusProps) {
   const t = useTranslations('order.thanks');
   const [orderData, setOrderData] = useState<OrderData | null>(null);
   const [loading, setLoading] = useState(true);
@@ -39,17 +74,19 @@ export function OrderStatus({ orderId }: OrderStatusProps) {
 
     const fetchOrderStatus = async () => {
       try {
-        const response = await fetch(`/api/payments/${orderId}`);
+        // For manual orders, fetch order details directly
+        const endpoint = isManual ? `/api/orders/${orderId}` : `/api/payments/${orderId}`;
+        const response = await fetch(endpoint);
         if (!response.ok) throw new Error('Failed to fetch order');
         
         const data = await response.json();
         setOrderData(data);
         
-        // Stop polling if payment is completed or failed
-        if (data.paymentStatus === 'succeeded' || data.paymentStatus === 'canceled') {
+        // Only poll for non-manual orders
+        if (!isManual && (data.paymentStatus === 'succeeded' || data.paymentStatus === 'canceled')) {
           clearInterval(intervalId);
         }
-      } catch (err) {
+      } catch {
         setError(true);
         clearInterval(intervalId);
       } finally {
@@ -60,11 +97,15 @@ export function OrderStatus({ orderId }: OrderStatusProps) {
     // Initial fetch
     fetchOrderStatus();
 
-    // Poll every 3 seconds if payment is pending
-    intervalId = setInterval(fetchOrderStatus, 3000);
+    // Only poll for non-manual orders
+    if (!isManual) {
+      intervalId = setInterval(fetchOrderStatus, 3000);
+    }
 
-    return () => clearInterval(intervalId);
-  }, [orderId]);
+    return () => {
+      if (intervalId) clearInterval(intervalId);
+    };
+  }, [orderId, isManual]);
 
   if (loading) {
     return (
@@ -84,9 +125,10 @@ export function OrderStatus({ orderId }: OrderStatusProps) {
     );
   }
 
-  const isPaid = orderData.status === 'paid' || orderData.paymentStatus === 'succeeded';
-  const isPending = orderData.paymentStatus === 'pending' || orderData.paymentStatus === 'waiting_for_capture';
-  const isFailed = orderData.paymentStatus === 'canceled';
+  const isManualOrder = isManual || orderData.status === 'manual_processing';
+  const isPaid = !isManualOrder && (orderData.status === 'paid' || orderData.paymentStatus === 'succeeded');
+  const isPending = !isManualOrder && (orderData.paymentStatus === 'pending' || orderData.paymentStatus === 'waiting_for_capture');
+  const isFailed = !isManualOrder && orderData.paymentStatus === 'canceled';
 
   return (
     <motion.div
@@ -125,34 +167,22 @@ export function OrderStatus({ orderId }: OrderStatusProps) {
             </p>
           </>
         )}
+        
+        {isManualOrder && (
+          <>
+            <Package className="w-16 h-16 mx-auto mb-4 text-dlc-silver" />
+            <h1 className="text-4xl font-cormorant font-bold mb-4">{t('manual.title')}</h1>
+            <p className="text-xl text-dlc-text-secondary">
+              {t('manual.description').replace('{orderId}', orderId)}
+            </p>
+          </>
+        )}
       </div>
 
-      {/* Order Details */}
+              {/* Order Details */}
       <div className="glass p-8 rounded-lg">
-        <h2 className="text-xl font-semibold mb-4">Order Details</h2>
-        
-        <div className="space-y-4 mb-6">
-          {orderData.items.map((item, index) => (
-            <div key={index} className="flex justify-between">
-              <div>
-                <p className="font-medium">{item.variant.product.name}</p>
-                <p className="text-sm text-dlc-text-secondary">
-                  {item.variant.type} • {item.variant.size} × {item.quantity}
-                </p>
-              </div>
-              <p className="font-medium">
-                {formatPrice(item.price * item.quantity)}
-              </p>
-            </div>
-          ))}
-        </div>
+        <OrderDetailsSection orderData={orderData} />
 
-        <div className="border-t border-dlc-silver/10 pt-4">
-          <div className="flex justify-between text-lg font-semibold">
-            <span>Total</span>
-            <span>{formatPrice(orderData.amount)}</span>
-          </div>
-        </div>
       </div>
     </motion.div>
   );

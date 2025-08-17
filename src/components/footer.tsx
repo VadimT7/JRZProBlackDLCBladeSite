@@ -27,6 +27,7 @@ export function Footer() {
     {
       title: t('sections.legal.title'),
       links: [
+        { href: '/legal', label: t('sections.legal.title') },
         { href: '/legal/payment', label: t('sections.legal.payment') },
         { href: '/legal/delivery', label: t('sections.legal.delivery') },
         { href: '/legal/privacy', label: t('sections.legal.privacy') },
