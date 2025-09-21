@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useTranslations } from 'next-intl';
 import { useState, useEffect } from 'react';
 import { Trophy, Medal, Crown, Star, Calendar, Users, Target } from 'lucide-react';
@@ -328,7 +328,7 @@ export function ChampionshipTracker() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {championships.slice(0, 6).map((championship, index) => (
               <ChampionshipCard
-                key={`${championship.year}-${championship.event}`}
+                key={`${championship.year}-${championship.eventKey}`}
                 championship={championship}
                 index={index}
                 isActive={activeChampionship === index}

@@ -31,11 +31,5 @@ export default async function OrderThanksPage({ searchParams }: PageProps) {
     );
   }
 
-  return (
-    <div className="min-h-screen py-24">
-      <div className="container mx-auto px-4">
-        <OrderStatus orderId={orderId} isManual={manual === 'true'} />
-      </div>
-    </div>
-  );
+  return <OrderStatus orderId={orderId} isManual={manual === 'true'} />;
 }

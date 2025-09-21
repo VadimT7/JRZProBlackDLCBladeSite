@@ -96,8 +96,10 @@ export default function CheckoutPage() {
       if (result.orderId) {
         // Clear cart
         clearCart();
-        // Redirect to thank you page
-        router.push(`/${locale}/order/thanks?orderId=${result.orderId}&manual=true`);
+        // Redirect to thank you page using window.location for more reliable navigation
+        const thankYouUrl = `/${locale}/order/thanks?orderId=${result.orderId}&manual=true`;
+        console.log('Redirecting to:', thankYouUrl);
+        window.location.href = thankYouUrl;
       } else {
         throw new Error('Failed to create order');
       }

@@ -47,7 +47,6 @@ const scienceSteps = [
 ];
 
 function InteractiveBlade() {
-  const t = useTranslations('home.science');
   const [isHovered, setIsHovered] = useState(false);
 
   return (
@@ -163,15 +162,6 @@ function InteractiveBlade() {
         />
       </motion.div>
 
-      {/* Hover instruction */}
-      <motion.div
-        className="absolute bottom-4 left-1/2 -translate-x-1/2 text-sm text-dlc-text-secondary opacity-70"
-        animate={{
-          opacity: isHovered ? 0 : 0.7
-        }}
-        transition={{ duration: 0.3 }}
-      >
-      </motion.div>
     </div>
   );
 }

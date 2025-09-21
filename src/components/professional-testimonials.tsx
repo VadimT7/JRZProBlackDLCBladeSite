@@ -168,7 +168,7 @@ function VideoTestimonial({ testimonial, isActive }: { testimonial: any; isActiv
           <div className="relative">
             <Quote className="w-8 h-8 text-dlc-gold/30 mb-2" />
             <blockquote className="text-lg italic text-dlc-text-secondary">
-              "{t(testimonial.quote)}"
+              &ldquo;{t(testimonial.quote)}&rdquo;
             </blockquote>
           </div>
 
@@ -177,7 +177,7 @@ function VideoTestimonial({ testimonial, isActive }: { testimonial: any; isActiv
             {Object.entries(testimonial.stats).map(([key, value]) => (
               <div key={key} className="text-center">
                 <div className="text-2xl font-bold text-dlc-gold">
-                  {typeof value === 'number' && value % 1 !== 0 ? value.toFixed(1) : value}
+                  {typeof value === 'number' && value % 1 !== 0 ? value.toFixed(1) : String(value)}
                 </div>
                 <div className="text-sm text-dlc-text-secondary">
                   {t(`stats.${key}`)}
