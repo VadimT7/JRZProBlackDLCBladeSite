@@ -61,7 +61,7 @@ export function SizingGuide() {
             >
               <ArrowRight className="w-5 h-5 text-dlc-silver flex-shrink-0" />
               <p className="text-sm text-dlc-text-secondary">
-                Pro tip: When in doubt, always choose the larger size for better comfort and performance.
+                <span className="text-dlc-silver font-semibold">{t('proTip.label')}</span> {t('proTip.text')}
               </p>
             </motion.div>
           </div>

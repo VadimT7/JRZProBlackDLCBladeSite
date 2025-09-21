@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { useLocale, useTranslations } from 'next-intl';
 import Link from 'next/link';
+import Image from 'next/image';
 import { ArrowRight, Activity, Shield } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
@@ -36,11 +37,30 @@ export function ComparisonCards() {
             transition={{ duration: 0.6 }}
             className="glass glass-hover p-8 rounded-2xl group"
           >
+            {/* Player Blade Image */}
+            <div className="relative h-64 mb-6 rounded-lg overflow-hidden bg-gradient-to-br from-dlc-silver/5 to-transparent group/image cursor-pointer">
+              {/* Glow effect on hover */}
+              <div className="absolute inset-0 bg-gradient-to-r from-dlc-silver/0 via-dlc-silver/20 to-dlc-silver/0 opacity-0 group-hover/image:opacity-100 transition-opacity duration-500 animate-pulse" />
+              
+              {/* Reflection effect */}
+              <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-transparent opacity-0 group-hover/image:opacity-100 transition-opacity duration-300" />
+              
+              <Image
+                src="/images/product/JRZ-SHIFT-272-Pro Black DLC_HQ_Logo.png"
+                alt="JRZ Player Blade"
+                fill
+                className="object-contain p-3 group-hover/image:scale-105 transition-transform duration-300"
+              />
+              
+              {/* Shimmer animation */}
+              <div className="absolute inset-0 -translate-x-full group-hover/image:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12" />
+            </div>
+            
             <div className="flex items-start justify-between mb-6">
               <div className="w-16 h-16 rounded-full bg-dlc-silver/10 flex items-center justify-center group-hover:bg-dlc-silver/20 transition-colors">
                 <Activity className="w-8 h-8 text-dlc-silver" />
               </div>
-              <span className="text-4xl font-cormorant font-bold text-dlc-silver/50">
+              <span className="text-4xl font-cormorant font-bold text-dlc-gold">
                 {t('player.radius')}
               </span>
             </div>
@@ -77,11 +97,30 @@ export function ComparisonCards() {
             transition={{ duration: 0.6 }}
             className="glass glass-hover p-8 rounded-2xl group"
           >
+            {/* Goalie Blade Image */}
+            <div className="relative h-64 mb-6 rounded-lg overflow-hidden bg-gradient-to-br from-dlc-gold/5 to-transparent group/image cursor-pointer">
+              {/* Glow effect on hover */}
+              <div className="absolute inset-0 bg-gradient-to-r from-dlc-gold/0 via-dlc-gold/20 to-dlc-gold/0 opacity-0 group-hover/image:opacity-100 transition-opacity duration-500 animate-pulse" />
+              
+              {/* Reflection effect */}
+              <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-transparent opacity-0 group-hover/image:opacity-100 transition-opacity duration-300" />
+              
+              <Image
+                src="/images/product/JRZ-1PGOALIE-09-Pro Black DLC_HQ_Logo.png"
+                alt="JRZ Goalie Blade"
+                fill
+                className="object-contain p-3 group-hover/image:scale-105 transition-transform duration-300"
+              />
+              
+              {/* Shimmer animation */}
+              <div className="absolute inset-0 -translate-x-full group-hover/image:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12" />
+            </div>
+            
             <div className="flex items-start justify-between mb-6">
               <div className="w-16 h-16 rounded-full bg-dlc-gold/10 flex items-center justify-center group-hover:bg-dlc-gold/20 transition-colors">
                 <Shield className="w-8 h-8 text-dlc-gold" />
               </div>
-              <span className="text-4xl font-cormorant font-bold text-dlc-gold/50">
+              <span className="text-4xl font-cormorant font-bold text-dlc-gold">
                 {t('goalie.radius')}
               </span>
             </div>

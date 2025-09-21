@@ -71,19 +71,19 @@ export function ContactInfo() {
 
       {/* Business Hours */}
       <div className="glass p-8 rounded-lg">
-        <h4 className="text-lg font-semibold mb-4">Business Hours</h4>
+        <h4 className="text-lg font-semibold mb-4">{t('businessHours.title')}</h4>
         <div className="space-y-2 text-dlc-text-secondary">
           <div className="flex justify-between">
-            <span>Monday - Friday</span>
-            <span>9:00 - 18:00 MSK</span>
+            <span>{t('businessHours.weekdays')}</span>
+            <span>{t('businessHours.weekdaysTime')}</span>
           </div>
           <div className="flex justify-between">
-            <span>Saturday</span>
-            <span>10:00 - 16:00 MSK</span>
+            <span>{t('businessHours.saturday')}</span>
+            <span>{t('businessHours.saturdayTime')}</span>
           </div>
           <div className="flex justify-between">
-            <span>Sunday</span>
-            <span>Closed</span>
+            <span>{t('businessHours.sunday')}</span>
+            <span>{t('businessHours.closed')}</span>
           </div>
         </div>
       </div>
@@ -91,7 +91,7 @@ export function ContactInfo() {
       {/* Response Time */}
       <div className="glass p-6 rounded-lg bg-gradient-to-br from-dlc-silver/5 to-transparent">
         <p className="text-sm text-center">
-          <span className="text-dlc-silver font-semibold">Average response time:</span> 2-4 hours during business hours
+          <span className="text-dlc-silver font-semibold">{t('responseTime.label')}</span> {t('responseTime.time')}
         </p>
       </div>
     </motion.div>

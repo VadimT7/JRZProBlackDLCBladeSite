@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { useTranslations } from 'next-intl';
+import Image from 'next/image';
 import { Clock, Zap, Heart, Info } from 'lucide-react';
 
 export function SharpeningSections() {
@@ -111,6 +112,53 @@ export function SharpeningSections() {
           </motion.div>
         </div>
 
+        {/* Blade Showcase */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="mb-16"
+        >
+          <div className="text-center mb-8">
+            <h3 className="text-3xl font-cormorant font-bold mb-4">
+              {t('showcase.title') || 'Professional Grade Blades'}
+            </h3>
+            <p className="text-dlc-text-secondary">
+              {t('showcase.subtitle') || 'Engineered for optimal performance and longevity'}
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              { nameKey: 'showcase.blades.proBlackDLC', image: '/images/product/JRZ-SHIFT-272-Pro Black DLC_HQ_Logo.png' },
+              { nameKey: 'showcase.blades.proSteel', image: '/images/product/JRZ-SHIFT-272-Pro Steel_HQ_Logo.png' },
+              { nameKey: 'showcase.blades.goalie', image: '/images/product/JRZ-1PGOALIE-09-Pro Black DLC_HQ_Logo.png' },
+            ].map((blade, index) => (
+              <motion.div
+                key={blade.nameKey}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                className="glass glass-hover p-6 rounded-2xl group"
+              >
+                <div className="relative aspect-square mb-4 rounded-lg overflow-hidden bg-gradient-to-br from-dlc-silver/5 to-transparent">
+                  <Image
+                    src={blade.image}
+                    alt={t(blade.nameKey)}
+                    fill
+                    className="object-contain p-4 group-hover:scale-110 transition-transform duration-300"
+                  />
+                </div>
+                <h4 className="text-lg font-semibold text-center group-hover:text-dlc-silver transition-colors">
+                  {t(blade.nameKey)}
+                </h4>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+
         {/* Pro Tip */}
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
@@ -121,7 +169,7 @@ export function SharpeningSections() {
         >
           <div className="glass p-8 rounded-2xl bg-gradient-to-br from-dlc-silver/5 to-transparent">
             <p className="text-lg text-center">
-              <span className="text-dlc-silver font-semibold">Pro Tip:</span> With DLC coating, you&apos;ll notice significantly reduced wear and no deburring during sharpening, making maintenance faster and easier.
+              <span className="text-dlc-silver font-semibold">{t('proTip.label')}</span> {t('proTip.text')}
             </p>
           </div>
         </motion.div>

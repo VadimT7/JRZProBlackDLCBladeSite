@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
-import { PageHero } from '@/components/page-hero';
+import { SharpeningHero } from '@/components/sharpening/hero';
 import { SharpeningSections } from '@/components/sharpening/sections';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
@@ -16,10 +16,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 export default function SharpeningPage() {
   return (
     <>
-      <PageHero
-        titleKey="sharpening.hero.title"
-        subtitleKey="sharpening.hero.subtitle"
-      />
+      <SharpeningHero />
       <SharpeningSections />
     </>
   );

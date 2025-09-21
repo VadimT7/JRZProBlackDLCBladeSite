@@ -7,13 +7,27 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X, Minus, Plus, ShoppingBag } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useCartStore } from '@/lib/cart-store';
-import { formatPrice } from '@/lib/utils';
+import { formatPrice, mmToEuropeanShoeSize } from '@/lib/utils';
 
 export function CartDrawer() {
   const t = useTranslations('cart');
+  const tShop = useTranslations('shop.product');
   const locale = useLocale();
-  const { isOpen, closeCart, items, removeItem, updateQuantity, getTotalPrice } = useCartStore();
+  const { isOpen, closeCart, items, removeItem, updateQuantity, clearCart, getTotalPrice } = useCartStore();
   const totalPrice = getTotalPrice();
+
+  // Helper function to display correct variant type
+  const getDisplayVariantType = (variantType: string) => {
+    // Handle old translation keys
+    if (variantType === 'shop.product.goalie' || variantType === 'goalie') {
+      return tShop('variant.goalie');
+    }
+    if (variantType === 'shop.product.player' || variantType === 'player') {
+      return tShop('variant.player');
+    }
+    // Return as-is if already translated
+    return variantType;
+  };
 
   return (
     <AnimatePresence>
@@ -76,7 +90,7 @@ export function CartDrawer() {
                         <div>
                           <h3 className="font-medium">{item.productName}</h3>
                           <p className="text-sm text-dlc-text-secondary">
-                            {item.variantType} • {item.variantSize}
+                            {getDisplayVariantType(item.variantType)} • {mmToEuropeanShoeSize(item.variantSize)}
                           </p>
                         </div>
                         <Button
@@ -136,6 +150,15 @@ export function CartDrawer() {
                     {t('continueShopping')}
                   </Button>
                 </Link>
+                <Button 
+                  variant="ghost" 
+                  className="w-full text-dlc-text-secondary hover:text-red-500" 
+                  onClick={() => {
+                    clearCart();
+                  }}
+                >
+                  {t('clearCart')}
+                </Button>
               </div>
             )}
           </motion.div>

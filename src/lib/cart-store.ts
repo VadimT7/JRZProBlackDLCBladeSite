@@ -25,6 +25,20 @@ interface CartStore {
   getTotalItems: () => number;
 }
 
+// Helper function to fix old translation keys in cart items
+const migrateCartItem = (item: CartItem): CartItem => {
+  let variantType = item.variantType;
+  
+  // Fix old translation keys
+  if (variantType === 'shop.product.goalie' || variantType === 'goalie') {
+    variantType = 'Goalie (30\')'; // Default to English, will be handled by display logic
+  } else if (variantType === 'shop.product.player' || variantType === 'player') {
+    variantType = 'Player (10\')'; // Default to English, will be handled by display logic
+  }
+  
+  return { ...item, variantType };
+};
+
 export const useCartStore = create<CartStore>()(
   persist(
     (set, get) => ({
@@ -76,6 +90,14 @@ export const useCartStore = create<CartStore>()(
     }),
     {
       name: 'jrz-cart',
+      migrate: (persistedState: any, version: number) => {
+        // Migrate old cart items with incorrect translation keys
+        if (persistedState?.items) {
+          persistedState.items = persistedState.items.map(migrateCartItem);
+        }
+        return persistedState;
+      },
+      version: 1,
     }
   )
 );

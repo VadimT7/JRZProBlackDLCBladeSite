@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { useTranslations } from 'next-intl';
+import Image from 'next/image';
 import { CheckCircle2, Sparkles, Shield, Gauge, Zap, Award, Clock, Layers } from 'lucide-react';
 
 export function TechnologySections() {
@@ -79,10 +80,15 @@ export function TechnologySections() {
                 </div>
               </div>
               <div className="relative">
-                <div className="aspect-square rounded-full bg-gradient-to-br from-dlc-silver/20 to-transparent p-8">
-                  <div className="w-full h-full rounded-full bg-gradient-to-tr from-dlc-bg via-dlc-elevation to-dlc-bg flex items-center justify-center relative">
-                    <div className="absolute inset-0 rounded-full animate-pulse bg-gradient-to-r from-dlc-silver/20 to-transparent" />
-                    <span className="text-6xl font-cormorant font-bold text-gradient">DLC</span>
+                <div className="aspect-square rounded-2xl bg-gradient-to-br from-dlc-silver/5 to-transparent p-8 overflow-hidden">
+                  <div className="relative w-full h-full">
+                    <Image
+                      src="/images/product/JRZ-SHIFT-272-Pro Black DLC_HQ_Logo.png"
+                      alt="JRZ Pro Black DLC Blade Technology"
+                      fill
+                      className="object-contain"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-dlc-bg/10 to-transparent" />
                   </div>
                 </div>
               </div>

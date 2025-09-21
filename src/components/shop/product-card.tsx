@@ -7,7 +7,7 @@ import { useLocale, useTranslations } from 'next-intl';
 import Image from 'next/image';
 import { ShoppingCart, Star } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { formatPrice } from '@/lib/utils';
+import { formatPrice, mmToEuropeanShoeSize } from '@/lib/utils';
 import { useCartStore } from '@/lib/cart-store';
 // import type { Product, Variant } from '@prisma/client'; // Types used in ProductWithVariants
 
@@ -60,7 +60,7 @@ export function ProductCard({ product }: ProductCardProps) {
       variantId: selectedVariant.id,
       productId: product.id,
       productName: product.name,
-      variantType: t(selectedType),
+      variantType: t(`variant.${selectedType}`),
       variantSize: selectedVariant.size,
       quantity: 1,
       price: product.price,
@@ -89,13 +89,13 @@ export function ProductCard({ product }: ProductCardProps) {
         <div className="glass p-8 rounded-2xl">
           <div className="aspect-square relative bg-gradient-to-br from-dlc-silver/10 to-transparent rounded-lg overflow-hidden">
             <Image
-              src="/images/product/blade-hero.jpg"
+              src="/images/product/JRZ-SHIFT-272-Pro Black DLC_HQ_Logo.png"
               alt={product.name}
               fill
-              className="object-cover"
+              className="object-contain p-4"
               priority
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-dlc-bg/50 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-dlc-bg/20 to-transparent" />
           </div>
         </div>
 
@@ -120,7 +120,7 @@ export function ProductCard({ product }: ProductCardProps) {
         <div className="mb-8">
           <Link href={`/${locale}/shop/${product.id}`} className="block group">
             <h1 className="text-4xl font-cormorant font-bold mb-4 group-hover:text-dlc-silver transition-colors">{product.name}</h1>
-            <p className="text-xl text-dlc-text-secondary mb-6 group-hover:text-dlc-text-primary transition-colors">{product.description}</p>
+            <p className="text-xl text-dlc-text-secondary mb-6 group-hover:text-dlc-text-primary transition-colors">{t('description')}</p>
           </Link>
           
           {/* Rating */}
@@ -130,7 +130,7 @@ export function ProductCard({ product }: ProductCardProps) {
                 <Star key={i} className="w-5 h-5 fill-dlc-gold text-dlc-gold" />
               ))}
             </div>
-            <span className="text-sm text-dlc-text-secondary">(127 reviews)</span>
+            <span className="text-sm text-dlc-text-secondary">({t('reviewCount')})</span>
           </div>
 
           {/* Price */}
@@ -177,7 +177,7 @@ export function ProductCard({ product }: ProductCardProps) {
                       : 'hover:border-dlc-silver/50'
                   } ${variant.stock === 0 ? 'opacity-50 cursor-not-allowed' : ''}`}
                 >
-                  <span className="block text-sm">{variant.size}</span>
+                  <span className="block text-sm">{mmToEuropeanShoeSize(variant.size)}</span>
                 </button>
               ))}
             </div>

@@ -10,48 +10,48 @@ const reviews = [
     name: 'Александр П.',
     rating: 5,
     date: '2024-01-15',
-    position: 'Профессиональный игрок',
-    review: 'Невероятные лезвия! DLC покрытие действительно держит заточку намного дольше. Скольжение стало заметно лучше.',
+    positionKey: 'positions.professionalPlayer',
+    reviewKey: 'list.review1',
   },
   {
     id: 2,
     name: 'Dmitry K.',
     rating: 5,
     date: '2024-01-10',
-    position: 'Goalie, Amateur League',
-    review: 'Best investment for my game. The 30\' radius is perfect for butterfly saves. Edge quality is unmatched.',
+    positionKey: 'positions.goalieAmateur',
+    reviewKey: 'list.review2',
   },
   {
     id: 3,
     name: 'Иван С.',
     rating: 5,
     date: '2024-01-05',
-    position: 'Защитник',
-    review: 'Точность профилирования поражает. Пара идеально сбалансирована. Рекомендую всем серьезным игрокам.',
+    positionKey: 'positions.defenseman',
+    reviewKey: 'list.review3',
   },
   {
     id: 4,
     name: 'Maria L.',
     rating: 5,
     date: '2023-12-28',
-    position: 'Forward, Women\'s League',
-    review: 'The mirror finish is real! Glide improvement is noticeable from the first stride. Worth every ruble.',
+    positionKey: 'positions.forwardWomen',
+    reviewKey: 'list.review4',
   },
   {
     id: 5,
     name: 'Сергей В.',
     rating: 5,
     date: '2023-12-20',
-    position: 'Тренер',
-    review: 'Рекомендую всем своим ученикам. Качество на высшем уровне, доставка быстрая. Отличный продукт!',
+    positionKey: 'positions.coach',
+    reviewKey: 'list.review5',
   },
   {
     id: 6,
     name: 'Pavel M.',
     rating: 5,
     date: '2023-12-15',
-    position: 'Beer League Hero',
-    review: 'Game changer! My edges hold through multiple games now. No more mid-game sharpening.',
+    positionKey: 'positions.beerLeague',
+    reviewKey: 'list.review6',
   },
 ];
 
@@ -101,7 +101,7 @@ export function ReviewsList() {
                   </div>
                   <div>
                     <p className="font-semibold">{review.name}</p>
-                    <p className="text-xs text-dlc-text-secondary">{review.position}</p>
+                    <p className="text-xs text-dlc-text-secondary">{t(review.positionKey)}</p>
                   </div>
                 </div>
                 <p className="text-xs text-dlc-text-secondary">{review.date}</p>
@@ -119,7 +119,7 @@ export function ReviewsList() {
 
               {/* Review */}
               <p className="text-sm text-dlc-text-secondary leading-relaxed">
-                {review.review}
+                {t(review.reviewKey)}
               </p>
             </motion.div>
           ))}

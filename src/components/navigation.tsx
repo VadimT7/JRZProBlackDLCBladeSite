@@ -2,6 +2,7 @@
 
 import * as React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useLocale, useTranslations } from 'next-intl';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -40,10 +41,16 @@ export function Navigation() {
         <div className="container mx-auto px-4 max-w-7xl">
           <div className="flex h-16 items-center justify-between">
             {/* Logo */}
-            <Link href={`/${locale}`} className="flex items-center space-x-2 flex-shrink-0">
-              <span className="text-xl font-cormorant font-semibold text-gradient">
-                JRZ Pro Black DLC
-              </span>
+            <Link href={`/${locale}`} className="flex items-center space-x-3 flex-shrink-0">
+              <div className="relative w-12 h-12">
+                <Image
+                  src="/images/product/JRZ_seul_rgb.png"
+                  alt="JRZ Logo"
+                  fill
+                  className="object-contain"
+                  priority
+                />
+              </div>
             </Link>
 
             {/* Desktop Navigation */}

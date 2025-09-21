@@ -34,6 +34,7 @@ async function main() {
   // Create Player variants
   const playerSizes = [
     { size: '254', description: 'Player Blade - Size 254mm', price: 15990 },
+    { size: '259', description: 'Player Blade - Size 259mm', price: 15990 },
     { size: '263', description: 'Player Blade - Size 263mm', price: 15990 },
     { size: '272', description: 'Player Blade - Size 272mm', price: 15990 },
     { size: '281', description: 'Player Blade - Size 281mm', price: 15990 },
@@ -58,6 +59,7 @@ async function main() {
   // Create Goalie variants
   const goalieSizes = [
     { size: '254', description: 'Goalie Blade - Size 254mm', price: 15990 },
+    { size: '259', description: 'Goalie Blade - Size 259mm', price: 15990 },
     { size: '263', description: 'Goalie Blade - Size 263mm', price: 15990 },
     { size: '272', description: 'Goalie Blade - Size 272mm', price: 15990 },
     { size: '281', description: 'Goalie Blade - Size 281mm', price: 15990 },

@@ -70,12 +70,12 @@ export function WarrantySections() {
           className="mt-16 text-center"
         >
           <div className="glass p-8 rounded-2xl max-w-3xl mx-auto">
-            <h3 className="text-xl font-semibold mb-4">Important Notes</h3>
+            <h3 className="text-xl font-semibold mb-4">{t('importantNotes.title')}</h3>
             <ul className="space-y-2 text-dlc-text-secondary">
-              <li>• Warranty covers manufacturing defects only</li>
-              <li>• Normal wear and tear is not covered</li>
-              <li>• Proof of purchase required for all claims</li>
-              <li>• Contact our support team for assistance</li>
+              <li>• {t('importantNotes.defectsOnly')}</li>
+              <li>• {t('importantNotes.wearNotCovered')}</li>
+              <li>• {t('importantNotes.proofRequired')}</li>
+              <li>• {t('importantNotes.contactSupport')}</li>
             </ul>
           </div>
         </motion.div>

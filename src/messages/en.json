@@ -56,6 +56,14 @@
       "durability": {
         "title": "Long-lasting",
         "description": "Edge holds longer, impact-resistant construction"
+      },
+      "blades": {
+        "shiftProBlackDLC": "SHIFT Pro Black DLC",
+        "sb4ProBlackDLC": "SB4 Pro Black DLC",
+        "sbxsProBlackDLC": "SBXS Pro Black DLC",
+        "xsgProBlackDLC": "XSG Pro Black DLC",
+        "goalieProBlackDLC": "Goalie Pro Black DLC",
+        "shiftgProBlackDLC": "SHIFTG Pro Black DLC"
       }
     },
     "cta": {
@@ -190,7 +198,11 @@
         "Measure from toe to heel in millimeters",
         "Select the closest available size",
         "When in doubt, size up"
-      ]
+      ],
+      "proTip": {
+        "label": "Pro tip:",
+        "text": "When in doubt, always choose the larger size for better comfort and performance."
+      }
     }
   },
   "sharpening": {
@@ -221,6 +233,19 @@
           "Avoid walking on hard surfaces",
           "Inspect regularly for damage"
         ]
+      },
+      "showcase": {
+        "title": "Professional Grade Blades",
+        "subtitle": "Engineered for optimal performance and longevity",
+        "blades": {
+          "proBlackDLC": "Pro Black DLC",
+          "proSteel": "Pro Steel",
+          "goalie": "Goalie Blade"
+        }
+      },
+      "proTip": {
+        "label": "Pro Tip:",
+        "text": "With DLC coating, you'll notice significantly reduced wear and no deburring during sharpening, making maintenance faster and easier."
       }
     }
   },
@@ -233,6 +258,22 @@
     "stats": {
       "rating": "Average Rating",
       "reviews": "Reviews"
+    },
+    "positions": {
+      "professionalPlayer": "Professional Player",
+      "goalieAmateur": "Goalie, Amateur League",
+      "defenseman": "Defenseman",
+      "forwardWomen": "Forward, Women's League",
+      "coach": "Coach",
+      "beerLeague": "Beer League Hero"
+    },
+    "list": {
+      "review1": "Incredible blades! DLC coating really holds the sharpening much longer. Gliding has become noticeably better.",
+      "review2": "Best investment for my game. The 30' radius is perfect for butterfly saves. Edge quality is unmatched.",
+      "review3": "The profiling accuracy is amazing. The pair is perfectly balanced. I recommend it to all serious players.",
+      "review4": "The mirror finish is real! Glide improvement is noticeable from the first stride. Worth every ruble.",
+      "review5": "I recommend it to all my students. Quality is top-notch, delivery is fast. Excellent product!",
+      "review6": "Game changer! My edges hold through multiple games now. No more mid-game sharpening."
     }
   },
   "warranty": {
@@ -253,6 +294,13 @@
       "shipping": {
         "title": "Russia-wide Shipping",
         "description": "Free shipping throughout Russia. Standard delivery takes 5-7 business days. Express shipping available for an additional fee."
+      },
+      "importantNotes": {
+        "title": "Important Notes",
+        "defectsOnly": "Warranty covers manufacturing defects only",
+        "wearNotCovered": "Normal wear and tear is not covered",
+        "proofRequired": "Proof of purchase required for all claims",
+        "contactSupport": "Contact our support team for assistance"
       }
     }
   },
@@ -273,7 +321,20 @@
       "title": "Direct Contact",
       "telegram": "Telegram",
       "whatsapp": "WhatsApp",
-      "email": "Support Email"
+      "email": "Support Email",
+      "businessHours": {
+        "title": "Business Hours",
+        "weekdays": "Monday - Friday",
+        "weekdaysTime": "9:00 - 18:00 MSK",
+        "saturday": "Saturday",
+        "saturdayTime": "10:00 - 16:00 MSK",
+        "sunday": "Sunday",
+        "closed": "Closed"
+      },
+      "responseTime": {
+        "label": "Average response time:",
+        "time": "2-4 hours during business hours"
+      }
     }
   },
   "shop": {
@@ -292,7 +353,9 @@
         "goalie": "Goalie (30')"
       },
       "stock": "In stock",
-      "outOfStock": "Out of stock"
+      "outOfStock": "Out of stock",
+      "reviewCount": "127 reviews",
+      "description": "Premium hockey skate blades with Diamond-Like Carbon coating for superior edge retention and glide performance."
     }
   },
   "cart": {
@@ -301,8 +364,10 @@
     "item": "item",
     "items": "items",
     "remove": "Remove",
+    "total": "Total",
     "checkout": "Checkout",
-    "continueShopping": "Continue Shopping"
+    "continueShopping": "Continue Shopping",
+    "clearCart": "Clear Cart"
   },
   "checkout": {
     "title": "Checkout",

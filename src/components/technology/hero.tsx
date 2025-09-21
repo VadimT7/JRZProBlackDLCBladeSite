@@ -8,20 +8,20 @@ export function TechnologyHero() {
 
   return (
     <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden">
-      {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-dlc-bg via-dlc-elevation/50 to-dlc-bg" />
-      
-      {/* Animated background pattern */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute inset-0" style={{
-          backgroundImage: `repeating-linear-gradient(
-            45deg,
-            transparent,
-            transparent 35px,
-            rgba(192, 192, 192, 0.1) 35px,
-            rgba(192, 192, 192, 0.1) 70px
-          )`
-        }} />
+      {/* Video Background */}
+      <div className="absolute inset-0">
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="w-full h-full object-cover"
+        >
+          <source src="/stickpuckcontrol.mp4" type="video/mp4" />
+          {/* Fallback for browsers that don't support video */}
+        </video>
+        {/* Dark overlay for better text readability */}
+        <div className="absolute inset-0 bg-dlc-bg/70" />
       </div>
 
       <div className="container mx-auto px-4 relative z-10">

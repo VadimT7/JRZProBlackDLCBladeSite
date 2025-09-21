@@ -10,7 +10,7 @@ import { z } from 'zod';
 import { Loader2, Package } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useCartStore } from '@/lib/cart-store';
-import { formatPrice } from '@/lib/utils';
+import { formatPrice, mmToEuropeanShoeSize } from '@/lib/utils';
 
 const checkoutSchema = z.object({
   fullName: z.string().min(2),
@@ -29,6 +29,7 @@ export default function CheckoutPage() {
   const t = useTranslations('checkout');
   const tCommon = useTranslations('common');
   const tErrors = useTranslations('errors');
+  const tShop = useTranslations('shop.product');
   const locale = useLocale();
   const router = useRouter();
   
@@ -50,6 +51,19 @@ export default function CheckoutPage() {
     router.push(`/${locale}/shop`);
     return null;
   }
+
+  // Helper function to display correct variant type (handles old translation keys)
+  const getDisplayVariantType = (variantType: string) => {
+    // Handle old translation keys
+    if (variantType === 'shop.product.goalie' || variantType === 'goalie') {
+      return tShop('variant.goalie');
+    }
+    if (variantType === 'shop.product.player' || variantType === 'player') {
+      return tShop('variant.player');
+    }
+    // Return as-is if already translated
+    return variantType;
+  };
 
   const onSubmit = async (data: CheckoutForm) => {
     setIsProcessing(true);
@@ -335,7 +349,7 @@ export default function CheckoutPage() {
                       <div>
                         <p className="font-medium">{item.productName}</p>
                         <p className="text-sm text-dlc-text-secondary">
-                          {item.variantType} • {item.variantSize} × {item.quantity}
+                          {getDisplayVariantType(item.variantType)} • {mmToEuropeanShoeSize(item.variantSize)} × {item.quantity}
                         </p>
                       </div>
                       <p className="font-medium">

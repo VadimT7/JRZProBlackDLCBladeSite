@@ -2,11 +2,11 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-// import { useTranslations } from 'next-intl'; // Not used directly in this component
+import { useTranslations } from 'next-intl';
 import { ShoppingCart, Star, Shield, Truck, RotateCcw } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useCartStore } from '@/lib/cart-store';
-import { formatCurrency } from '@/lib/utils';
+import { formatCurrency, mmToEuropeanShoeSize } from '@/lib/utils';
 type ProductWithVariants = {
   id: string;
   name: string;
@@ -35,14 +35,19 @@ interface ProductDetailProps {
 }
 
 export function ProductDetail({ product }: ProductDetailProps) {
-  // const t = useTranslations('shop.product'); // Translation not used directly
+  const t = useTranslations('shop.product');
   const addItem = useCartStore(state => state.addItem);
   const [selectedVariant, setSelectedVariant] = useState<ProductWithVariants['variants'][0] | null>(null);
   const [selectedImage, setSelectedImage] = useState(0);
   const [quantity, setQuantity] = useState(1);
 
-  // Use hardcoded images for now
-  const images: string[] = ['/images/product/blade-hero.jpg'];
+  // Use actual JRZ blade images
+  const images: string[] = [
+    '/images/product/JRZ-SHIFT-272-Pro Black DLC_HQ_Logo.png',
+    '/images/product/JRZ-SHIFT-272-Pro Steel_HQ_Logo.png',
+    '/images/product/JRZ-SB4-280-Pro Black DLC_HQ_Logo.png',
+    '/images/product/JRZ-SBXS-280-Pro Black DLC_HQ_Logo.png'
+  ];
 
   const handleAddToCart = () => {
     if (!selectedVariant) return;
@@ -51,7 +56,7 @@ export function ProductDetail({ product }: ProductDetailProps) {
       variantId: selectedVariant.id,
       productId: product.id,
       productName: product.name,
-      variantType: selectedVariant.type,
+      variantType: t(`variant.${selectedVariant.type}`),
       variantSize: selectedVariant.size,
       quantity,
       price: product.price,
@@ -74,11 +79,11 @@ export function ProductDetail({ product }: ProductDetailProps) {
           >
             <div className="space-y-4">
               {/* Main Image */}
-              <div className="aspect-square rounded-2xl overflow-hidden glass">
+              <div className="aspect-square rounded-2xl overflow-hidden glass p-4">
                 <img
                   src={images[selectedImage] || '/placeholder.jpg'}
                   alt={product.name}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-contain"
                 />
               </div>
               
@@ -128,7 +133,7 @@ export function ProductDetail({ product }: ProductDetailProps) {
                   {[...Array(5)].map((_, i) => (
                     <Star key={i} className="w-5 h-5 fill-dlc-gold text-dlc-gold" />
                   ))}
-                  <span className="ml-2 text-sm text-dlc-text-secondary">(127 reviews)</span>
+                  <span className="ml-2 text-sm text-dlc-text-secondary">({t('reviewCount')})</span>
                 </div>
               </div>
             </div>
@@ -149,7 +154,7 @@ export function ProductDetail({ product }: ProductDetailProps) {
                           : 'glass hover:bg-dlc-silver/10'
                       }`}
                     >
-                      {variant.size}mm
+                      {mmToEuropeanShoeSize(variant.size)}
                     </button>
                   ))}
                 </div>
@@ -169,7 +174,7 @@ export function ProductDetail({ product }: ProductDetailProps) {
                           : 'glass hover:bg-dlc-silver/10'
                       }`}
                     >
-                      {variant.size}mm
+                      {mmToEuropeanShoeSize(variant.size)}
                     </button>
                   ))}
                 </div>

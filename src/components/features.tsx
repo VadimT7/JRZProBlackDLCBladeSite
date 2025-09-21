@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { useTranslations } from 'next-intl';
+import Image from 'next/image';
 import { Shield, Sparkles, Target, Timer } from 'lucide-react';
 
 const features = [
@@ -67,6 +68,57 @@ export function Features() {
               <p className="text-dlc-text-secondary">
                 {t(feature.descriptionKey)}
               </p>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+
+      {/* Product Showcase */}
+      <div className="container mx-auto px-4 py-16">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-12"
+        >
+          <h2 className="text-3xl md:text-4xl font-cormorant font-bold mb-4">
+            Our Blade Models
+          </h2>
+          <p className="text-dlc-text-secondary">
+            Precision-engineered for peak performance
+          </p>
+        </motion.div>
+
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
+          {[
+            { nameKey: 'blades.shiftProBlackDLC', image: '/images/product/JRZ-SHIFT-272-Pro Black DLC_HQ_Logo.png' },
+            { nameKey: 'blades.sb4ProBlackDLC', image: '/images/product/JRZ-SB4-280-Pro Black DLC_HQ_Logo.png' },
+            { nameKey: 'blades.sbxsProBlackDLC', image: '/images/product/JRZ-SBXS-280-Pro Black DLC_HQ_Logo.png' },
+            { nameKey: 'blades.xsgProBlackDLC', image: '/images/product/JRZ-XSG-282-Pro Black DLC_HQ_Logo.png' },
+            { nameKey: 'blades.goalieProBlackDLC', image: '/images/product/JRZ-1PGOALIE-09-Pro Black DLC_HQ_Logo.png' },
+            { nameKey: 'blades.shiftgProBlackDLC', image: '/images/product/JRZ-SHIFTG-09-Pro Black DLC_HQ_Logo.png' },
+          ].map((blade, index) => (
+            <motion.div
+              key={blade.nameKey}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              whileHover={{ scale: 1.05 }}
+              className="glass glass-hover p-4 rounded-lg group cursor-pointer"
+            >
+              <div className="relative aspect-square mb-3 rounded-lg overflow-hidden bg-gradient-to-br from-dlc-silver/5 to-transparent">
+                <Image
+                  src={blade.image}
+                  alt={t(blade.nameKey)}
+                  fill
+                  className="object-contain p-2 group-hover:scale-110 transition-transform duration-300"
+                />
+              </div>
+              <h4 className="text-sm font-medium text-center text-dlc-text-secondary group-hover:text-dlc-silver transition-colors">
+                {t(blade.nameKey)}
+              </h4>
             </motion.div>
           ))}
         </div>

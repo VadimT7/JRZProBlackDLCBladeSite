@@ -5,16 +5,16 @@ import { useTranslations } from 'next-intl';
 import { CheckCircle2 } from 'lucide-react';
 
 const sizingData = [
-  { size: '221', length: 221, shoeSize: '4-5', available: true },
-  { size: '230', length: 230, shoeSize: '5-6', available: true },
-  { size: '238', length: 238, shoeSize: '6-7', available: true },
-  { size: '246', length: 246, shoeSize: '7-8', available: true },
-  { size: '254', length: 254, shoeSize: '8-9', available: true },
-  { size: '263', length: 263, shoeSize: '9-10', available: true },
-  { size: '272', length: 272, shoeSize: '10-11', available: true },
-  { size: '280', length: 280, shoeSize: '11-12', available: true },
-  { size: '288', length: 288, shoeSize: '12-13', available: true },
-  { size: '296', length: 296, shoeSize: '13+', available: true },
+  { size: '221', length: 221, shoeSize: '36-37', available: true },
+  { size: '230', length: 230, shoeSize: '37-38', available: true },
+  { size: '238', length: 238, shoeSize: '38-39', available: true },
+  { size: '246', length: 246, shoeSize: '39-40', available: true },
+  { size: '254', length: 254, shoeSize: '40-41', available: true },
+  { size: '263', length: 263, shoeSize: '42-43', available: true },
+  { size: '272', length: 272, shoeSize: '43-44', available: true },
+  { size: '280', length: 280, shoeSize: '44-45', available: true },
+  { size: '288', length: 288, shoeSize: '45-46', available: true },
+  { size: '296', length: 296, shoeSize: '46+', available: true },
 ];
 
 export function SizingTable() {
