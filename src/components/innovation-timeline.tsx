@@ -25,8 +25,8 @@ const innovations = [
     color: 'text-dlc-gold',
     bgColor: 'bg-dlc-gold/10',
     status: 'current',
-    achievementKeys: ['127 championships won', '98.7% player satisfaction', '3x edge retention'],
-    impactKey: 'Industry standard redefined'
+    achievementKeys: ['championshipsWon', 'playerSatisfaction', 'edgeRetention3x'],
+    impactKey: 'industryStandardRedefined'
   },
   {
     year: 2023,
@@ -36,8 +36,8 @@ const innovations = [
     color: 'text-blue-400',
     bgColor: 'bg-blue-400/10',
     status: 'completed',
-    achievementKeys: ['Aerospace-grade precision', 'Perfect pair consistency', 'Zero tolerance variance'],
-    impactKey: 'Manufacturing excellence'
+    achievementKeys: ['aerospacePrecision', 'perfectPairConsistency', 'zeroToleranceVariance'],
+    impactKey: 'manufacturingExcellence'
   },
   {
     year: 2022,
@@ -47,8 +47,8 @@ const innovations = [
     color: 'text-purple-400',
     bgColor: 'bg-purple-400/10',
     status: 'completed',
-    achievementKeys: ['2850 HV hardness', 'Mirror finish quality', '50% longer sharpening intervals'],
-    impactKey: 'Industry breakthrough'
+    achievementKeys: ['hardness2850HV', 'mirrorFinishQuality', 'sharpeningIntervals50'],
+    impactKey: 'industryBreakthrough'
   },
   {
     year: 2021,
@@ -58,8 +58,8 @@ const innovations = [
     color: 'text-green-400',
     bgColor: 'bg-green-400/10',
     status: 'completed',
-    achievementKeys: ['Molecular engineering', 'Surface science mastery', 'Performance optimization'],
-    impactKey: 'Foundation for innovation'
+    achievementKeys: ['molecularEngineering', 'surfaceScienceMastery', 'performanceOptimization'],
+    impactKey: 'foundationForInnovation'
   }
 ];
 
@@ -160,7 +160,7 @@ function InnovationCard({ innovation, index, isActive, onClick }: {
                   >
                     <Award className={`w-4 h-4 ${innovation.color}`} />
                     <span className="text-sm text-dlc-text-secondary">
-                      {achievementKey.includes(' ') ? achievementKey : t(achievementKey)}
+                      {t(`achievementTexts.${achievementKey}`)}
                     </span>
                   </motion.div>
                 ))}
@@ -169,7 +169,7 @@ function InnovationCard({ innovation, index, isActive, onClick }: {
               <div className={`mt-4 p-3 rounded-lg ${innovation.bgColor}`}>
                 <div className="text-sm font-semibold mb-1">{t('impact')}</div>
                 <div className="text-sm text-dlc-text-secondary">
-                  {innovation.impactKey.includes(' ') ? innovation.impactKey : t(innovation.impactKey)}
+                  {t(`impacts.${innovation.impactKey}`)}
                 </div>
               </div>
             </motion.div>

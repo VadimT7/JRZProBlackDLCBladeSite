@@ -257,7 +257,26 @@
         "selfHealing": "Self-Healing Surface",
         "ai": "AI-Optimized Profiles"
       },
-      "cta": "Innovation never stops"
+      "achievementTexts": {
+        "championshipsWon": "127 championships won",
+        "playerSatisfaction": "98.7% player satisfaction",
+        "edgeRetention3x": "3x edge retention",
+        "aerospacePrecision": "Aerospace-grade precision",
+        "perfectPairConsistency": "Perfect pair consistency",
+        "zeroToleranceVariance": "Zero tolerance variance",
+        "hardness2850HV": "2850 HV hardness",
+        "mirrorFinishQuality": "Mirror finish quality",
+        "sharpeningIntervals50": "50% longer sharpening intervals",
+        "molecularEngineering": "Molecular engineering",
+        "surfaceScienceMastery": "Surface science mastery",
+        "performanceOptimization": "Performance optimization"
+      },
+      "impacts": {
+        "industryStandardRedefined": "Industry standard redefined",
+        "manufacturingExcellence": "Manufacturing excellence",
+        "industryBreakthrough": "Industry breakthrough",
+        "foundationForInnovation": "Foundation for innovation"
+      }
     }
   },
   "technology": {

@@ -257,7 +257,26 @@
         "selfHealing": "Самовосстанавливающаяся поверхность",
         "ai": "AI-оптимизированные профили"
       },
-      "cta": "Инновации никогда не останавливаются"
+      "achievementTexts": {
+        "championshipsWon": "127 выиграно чемпионатов",
+        "playerSatisfaction": "98.7% удовлетворенности игроков",
+        "edgeRetention3x": "3x удержание кромки",
+        "aerospacePrecision": "Авиационная точность",
+        "perfectPairConsistency": "Идеальная согласованность пары",
+        "zeroToleranceVariance": "Нулевой допуск отклонений",
+        "hardness2850HV": "Твердость 2850 HV",
+        "mirrorFinishQuality": "Качество зеркальной поверхности",
+        "sharpeningIntervals50": "50% реже заточка",
+        "molecularEngineering": "Молекулярная инженерия",
+        "surfaceScienceMastery": "Мастерство науки поверхностей",
+        "performanceOptimization": "Оптимизация производительности"
+      },
+      "impacts": {
+        "industryStandardRedefined": "Отраслевой стандарт переопределен",
+        "manufacturingExcellence": "Превосходство производства",
+        "industryBreakthrough": "Прорыв в отрасли",
+        "foundationForInnovation": "Основа для инноваций"
+      }
     }
   },
   "technology": {
