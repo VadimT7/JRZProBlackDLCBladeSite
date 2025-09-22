@@ -269,13 +269,17 @@
         "sharpeningIntervals50": "50% longer sharpening intervals",
         "molecularEngineering": "Molecular engineering",
         "surfaceScienceMastery": "Surface science mastery",
-        "performanceOptimization": "Performance optimization"
+        "performanceOptimization": "Performance optimization",
+        "quantumEnhancement": "Quantum hardness enhancement",
+        "frictionReduction99": "99.9% friction reduction",
+        "selfHealingSurface": "Self-healing surface"
       },
       "impacts": {
         "industryStandardRedefined": "Industry standard redefined",
         "manufacturingExcellence": "Manufacturing excellence",
         "industryBreakthrough": "Industry breakthrough",
-        "foundationForInnovation": "Foundation for innovation"
+        "foundationForInnovation": "Foundation for innovation",
+        "gameChangingPerformance": "Game-changing performance breakthrough"
       }
     }
   },

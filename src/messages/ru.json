@@ -269,13 +269,17 @@
         "sharpeningIntervals50": "50% реже заточка",
         "molecularEngineering": "Молекулярная инженерия",
         "surfaceScienceMastery": "Мастерство науки поверхностей",
-        "performanceOptimization": "Оптимизация производительности"
+        "performanceOptimization": "Оптимизация производительности",
+        "quantumEnhancement": "Квантовое усиление твердости",
+        "frictionReduction99": "99.9% снижение трения",
+        "selfHealingSurface": "Самовосстанавливающаяся поверхность"
       },
       "impacts": {
         "industryStandardRedefined": "Отраслевой стандарт переопределен",
         "manufacturingExcellence": "Превосходство производства",
         "industryBreakthrough": "Прорыв в отрасли",
-        "foundationForInnovation": "Основа для инноваций"
+        "foundationForInnovation": "Основа для инноваций",
+        "gameChangingPerformance": "Революционный прорыв в производительности"
       }
     }
   },

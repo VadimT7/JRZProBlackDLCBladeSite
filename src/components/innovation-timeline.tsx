@@ -14,7 +14,7 @@ const innovations = [
     color: 'text-cyan-400',
     bgColor: 'bg-cyan-400/10',
     status: 'future',
-    achievementKeys: ['quantumHardness', 'frictionReduction', 'selfHealingSurface'],
+    achievementKeys: ['quantumEnhancement', 'frictionReduction99', 'selfHealingSurface'],
     impactKey: 'gameChangingPerformance'
   },
   {
