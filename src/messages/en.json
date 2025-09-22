@@ -65,6 +65,30 @@
         "xsgProBlackDLC": "XSG Pro Black DLC",
         "goalieProBlackDLC": "Goalie Pro Black DLC",
         "shiftgProBlackDLC": "SHIFTG Pro Black DLC"
+      },
+      "bladeModels": {
+        "title": "Our Blade Models",
+        "subtitle": "Precision-engineered for peak performance",
+        "shiftProBlackDLC": {
+          "name": "SHIFT Pro Black DLC",
+          "specialty": "Ultimate Agility",
+          "description": "Revolutionary blade for forwards who demand explosive acceleration and razor-sharp turns."
+        },
+        "sb4ProBlackDLC": {
+          "name": "SB4 Pro Black DLC",
+          "specialty": "Power & Control",
+          "description": "Engineered for defensemen who need maximum stability and crushing power in every stride."
+        },
+        "goalieProBlackDLC": {
+          "name": "Goalie Pro Black DLC",
+          "specialty": "Goaltending Excellence",
+          "description": "Specifically designed for goalies with 30° radius for maximum stability and lightning-fast recovery."
+        },
+        "xsgProBlackDLC": {
+          "name": "XSG Pro Black DLC",
+          "specialty": "Speed Demon",
+          "description": "Built for players who live in the fast lane, delivering unmatched speed and precision."
+        }
       }
     },
     "cta": {

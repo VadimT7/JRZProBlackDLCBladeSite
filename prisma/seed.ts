@@ -33,15 +33,15 @@ async function main() {
 
   // Create Player variants
   const playerSizes = [
-    { size: '254', description: 'Player Blade - Size 254mm', price: 15990 },
-    { size: '259', description: 'Player Blade - Size 259mm', price: 15990 },
-    { size: '263', description: 'Player Blade - Size 263mm', price: 15990 },
-    { size: '272', description: 'Player Blade - Size 272mm', price: 15990 },
-    { size: '281', description: 'Player Blade - Size 281mm', price: 15990 },
-    { size: '290', description: 'Player Blade - Size 290mm', price: 15990 },
-    { size: '299', description: 'Player Blade - Size 299mm', price: 15990 },
-    { size: '308', description: 'Player Blade - Size 308mm', price: 15990 },
-    { size: '317', description: 'Player Blade - Size 317mm', price: 15990 },
+    { size: '36', description: 'Player Blade - Size 36', price: 15990 },
+    { size: '37', description: 'Player Blade - Size 37', price: 15990 },
+    { size: '38', description: 'Player Blade - Size 38', price: 15990 },
+    { size: '39', description: 'Player Blade - Size 39', price: 15990 },
+    { size: '40', description: 'Player Blade - Size 40', price: 15990 },
+    { size: '41', description: 'Player Blade - Size 41', price: 15990 },
+    { size: '42', description: 'Player Blade - Size 42', price: 15990 },
+    { size: '43', description: 'Player Blade - Size 43', price: 15990 },
+    { size: '44', description: 'Player Blade - Size 44', price: 15990 },
   ];
 
   for (const sizeData of playerSizes) {
@@ -58,15 +58,15 @@ async function main() {
 
   // Create Goalie variants
   const goalieSizes = [
-    { size: '254', description: 'Goalie Blade - Size 254mm', price: 15990 },
-    { size: '259', description: 'Goalie Blade - Size 259mm', price: 15990 },
-    { size: '263', description: 'Goalie Blade - Size 263mm', price: 15990 },
-    { size: '272', description: 'Goalie Blade - Size 272mm', price: 15990 },
-    { size: '281', description: 'Goalie Blade - Size 281mm', price: 15990 },
-    { size: '290', description: 'Goalie Blade - Size 290mm', price: 15990 },
-    { size: '299', description: 'Goalie Blade - Size 299mm', price: 15990 },
-    { size: '308', description: 'Goalie Blade - Size 308mm', price: 15990 },
-    { size: '317', description: 'Goalie Blade - Size 317mm', price: 15990 },
+    { size: '36', description: 'Goalie Blade - Size 36', price: 15990 },
+    { size: '37', description: 'Goalie Blade - Size 37', price: 15990 },
+    { size: '38', description: 'Goalie Blade - Size 38', price: 15990 },
+    { size: '39', description: 'Goalie Blade - Size 39', price: 15990 },
+    { size: '40', description: 'Goalie Blade - Size 40', price: 15990 },
+    { size: '41', description: 'Goalie Blade - Size 41', price: 15990 },
+    { size: '42', description: 'Goalie Blade - Size 42', price: 15990 },
+    { size: '43', description: 'Goalie Blade - Size 43', price: 15990 },
+    { size: '44', description: 'Goalie Blade - Size 44', price: 15990 },
   ];
 
   for (const sizeData of goalieSizes) {
@@ -81,7 +81,7 @@ async function main() {
     });
   }
 
-  console.log('✅ Created 16 product variants (8 Player + 8 Goalie)');
+  console.log('✅ Created 18 product variants (9 Player + 9 Goalie)');
 
   // Create sample orders for testing
   const sampleOrder = await prisma.order.create({
@@ -114,7 +114,7 @@ async function main() {
   console.log('');
   console.log('📊 Summary:');
   console.log('• 1 main product created');
-  console.log('• 16 variants created (8 Player + 8 Goalie)');
+  console.log('• 18 variants created (9 Player + 9 Goalie)');
   console.log('• 1 sample order created');
   console.log('');
   console.log('🚀 You can now start the development server with: npm run dev');

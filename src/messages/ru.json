@@ -65,6 +65,30 @@
         "xsgProBlackDLC": "XSG Pro Black DLC",
         "goalieProBlackDLC": "Лезвие вратаря Pro Black DLC",
         "shiftgProBlackDLC": "SHIFTG Pro Black DLC"
+      },
+      "bladeModels": {
+        "title": "Наши модели лезвий",
+        "subtitle": "Точно спроектированы для пиковой производительности",
+        "shiftProBlackDLC": {
+          "name": "SHIFT Pro Black DLC",
+          "specialty": "Максимальная маневренность",
+          "description": "Революционное лезвие для нападающих, требующих взрывного ускорения и острых поворотов."
+        },
+        "sb4ProBlackDLC": {
+          "name": "SB4 Pro Black DLC",
+          "specialty": "Мощность и контроль",
+          "description": "Разработано для защитников, которым нужна максимальная стабильность и сокрушительная мощь в каждом шаге."
+        },
+        "goalieProBlackDLC": {
+          "name": "Лезвие вратаря Pro Black DLC",
+          "specialty": "Превосходство вратаря",
+          "description": "Специально разработано для вратарей с радиусом 30° для максимальной стабильности и молниеносного восстановления."
+        },
+        "xsgProBlackDLC": {
+          "name": "XSG Pro Black DLC",
+          "specialty": "Демон скорости",
+          "description": "Создано для игроков, живущих на высокой скорости, обеспечивая непревзойденную скорость и точность."
+        }
       }
     },
     "cta": {

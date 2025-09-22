@@ -6,40 +6,26 @@ import { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight, Sparkles, Shield, Zap, Eye } from 'lucide-react';
 import Image from 'next/image';
 
-const blades = [
-  {
-    id: 'shift-pro-black',
-    name: 'SHIFT Pro Black DLC',
-    image: '/images/product/JRZ-SHIFT-272-Pro Black DLC_HQ_Logo.png',
-    features: ['dlc', 'precision', 'durability'],
-    specialty: 'Ultimate Agility',
-    description: 'Revolutionary blade for forwards who demand explosive acceleration and razor-sharp turns.'
-  },
-  {
-    id: 'sb4-pro-black',
-    name: 'SB4 Pro Black DLC',
-    image: '/images/product/JRZ-SB4-280-Pro Black DLC_HQ_Logo.png',
-    features: ['dlc', 'stability', 'power'],
-    specialty: 'Power & Control',
-    description: 'Engineered for defensemen who need maximum stability and crushing power in every stride.'
-  },
-  {
-    id: 'goalie-pro-black',
-    name: 'Goalie Pro Black DLC',
-    image: '/images/product/JRZ-1PGOALIE-09-Pro Black DLC_HQ_Logo.png',
-    features: ['dlc', 'stability', 'recovery'],
-    specialty: 'Goaltending Excellence',
-    description: 'Specifically designed for goalies with 30° radius for maximum stability and lightning-fast recovery.'
-  },
-  {
-    id: 'xsg-pro-black',
-    name: 'XSG Pro Black DLC',
-    image: '/images/product/JRZ-XSG-282-Pro Black DLC_HQ_Logo.png',
-    features: ['dlc', 'precision', 'speed'],
-    specialty: 'Speed Demon',
-    description: 'Built for players who live in the fast lane, delivering unmatched speed and precision.'
-  }
+const bladeIds = [
+  'shiftProBlackDLC',
+  'sb4ProBlackDLC', 
+  'goalieProBlackDLC',
+  'xsgProBlackDLC'
 ];
+
+const bladeImages = {
+  shiftProBlackDLC: '/images/product/JRZ-SHIFT-272-Pro Black DLC_HQ_Logo.png',
+  sb4ProBlackDLC: '/images/product/JRZ-SB4-280-Pro Black DLC_HQ_Logo.png',
+  goalieProBlackDLC: '/images/product/JRZ-1PGOALIE-09-Pro Black DLC_HQ_Logo.png',
+  xsgProBlackDLC: '/images/product/JRZ-XSG-282-Pro Black DLC_HQ_Logo.png'
+};
+
+const bladeFeatures = {
+  shiftProBlackDLC: ['dlc', 'precision', 'durability'],
+  sb4ProBlackDLC: ['dlc', 'stability', 'power'],
+  goalieProBlackDLC: ['dlc', 'stability', 'recovery'],
+  xsgProBlackDLC: ['dlc', 'precision', 'speed']
+};
 
 const features = {
   dlc: {
@@ -81,6 +67,7 @@ const features = {
 
 export function InteractiveShowcase() {
   const t = useTranslations('home.showcase');
+  const tBladeModels = useTranslations('home.features.bladeModels');
   const [currentBlade, setCurrentBlade] = useState(0);
   const [isAutoPlay, setIsAutoPlay] = useState(true);
   const [hoveredFeature, setHoveredFeature] = useState<string | null>(null);
@@ -90,23 +77,31 @@ export function InteractiveShowcase() {
     if (!isAutoPlay) return;
     
     const interval = setInterval(() => {
-      setCurrentBlade((prev) => (prev + 1) % blades.length);
+      setCurrentBlade((prev) => (prev + 1) % bladeIds.length);
     }, 4000);
 
     return () => clearInterval(interval);
   }, [isAutoPlay]);
 
   const nextBlade = () => {
-    setCurrentBlade((prev) => (prev + 1) % blades.length);
+    setCurrentBlade((prev) => (prev + 1) % bladeIds.length);
     setIsAutoPlay(false);
   };
 
   const prevBlade = () => {
-    setCurrentBlade((prev) => (prev - 1 + blades.length) % blades.length);
+    setCurrentBlade((prev) => (prev - 1 + bladeIds.length) % bladeIds.length);
     setIsAutoPlay(false);
   };
 
-  const currentBladeData = blades[currentBlade];
+  const currentBladeId = bladeIds[currentBlade];
+  const currentBladeData = {
+    id: currentBladeId,
+    name: tBladeModels(`${currentBladeId}.name`),
+    image: bladeImages[currentBladeId as keyof typeof bladeImages],
+    features: bladeFeatures[currentBladeId as keyof typeof bladeFeatures],
+    specialty: tBladeModels(`${currentBladeId}.specialty`),
+    description: tBladeModels(`${currentBladeId}.description`)
+  };
 
   return (
     <section className="py-20 relative overflow-hidden bg-gradient-to-br from-dlc-bg via-dlc-elevation/10 to-dlc-bg">
@@ -193,7 +188,7 @@ export function InteractiveShowcase() {
 
             {/* Blade indicators */}
             <div className="flex justify-center space-x-3 mt-8">
-              {blades.map((_, index) => (
+              {bladeIds.map((_, index) => (
                 <button
                   key={index}
                   onClick={() => {
