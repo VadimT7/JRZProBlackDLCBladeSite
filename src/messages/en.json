@@ -366,7 +366,9 @@
         "Increased contact area",
         "Enhanced recovery power"
       ]
-    }
+    },
+    "shopPlayerBlades": "Shop Player Blades",
+    "shopGoalieBlades": "Shop Goalie Blades"
   },
   "sizing": {
     "title": "Sizing Guide",

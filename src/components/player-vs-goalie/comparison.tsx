@@ -84,7 +84,7 @@ export function ComparisonCards() {
 
             <Link href={`/${locale}/shop?type=player`}>
               <Button className="w-full" variant="outline">
-                Shop Player Blades
+                {t('shopPlayerBlades')}
               </Button>
             </Link>
           </motion.div>
@@ -144,7 +144,7 @@ export function ComparisonCards() {
 
             <Link href={`/${locale}/shop?type=goalie`}>
               <Button className="w-full" variant="gold">
-                Shop Goalie Blades
+                {t('shopGoalieBlades')}
               </Button>
             </Link>
           </motion.div>
