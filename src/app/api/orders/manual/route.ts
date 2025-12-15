@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { z } from 'zod';
+import { sendAdminOrderNotification, sendCustomerOrderConfirmation } from '@/lib/email';
 
 const manualOrderSchema = z.object({
   fullName: z.string().min(2),
@@ -31,8 +32,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const { email, phone, items, totalAmount } = validation.data;
-    // Additional fields available but not currently stored: fullName, address, city, region, postalCode, country
+    const { fullName, email, phone, address, city, region, postalCode, country, items, totalAmount } = validation.data;
 
     // Fetch variant details to verify availability
     const variants = await prisma.variant.findMany({
@@ -71,16 +71,52 @@ export async function POST(request: NextRequest) {
         currency: 'RUB',
         status: 'manual_processing', // Special status for manual orders
         idempotenceKey: `manual_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`, // Required field
-        // Store additional details in a JSON field or separate table if needed
-        // For now, we'll store essential info in existing fields
         items: {
           create: orderItems,
         },
       },
+      include: {
+        items: {
+          include: {
+            variant: {
+              include: {
+                product: true,
+              },
+            },
+          },
+        },
+      },
     });
 
-    // TODO: Send notification email to admin about new manual order
-    // This would include all order details for manual processing
+    // Prepare email data
+    const emailData = {
+      orderId: order.id,
+      customerName: fullName,
+      customerEmail: email,
+      customerPhone: phone,
+      items: order.items.map(item => ({
+        productName: item.variant.product.name,
+        variantType: item.variant.type,
+        variantSize: item.variant.size,
+        quantity: item.quantity,
+        price: item.price,
+      })),
+      totalAmount,
+      address,
+      city,
+      region,
+      postalCode,
+      country,
+    };
+
+    // Send emails (don't await to avoid blocking the response)
+    Promise.all([
+      sendAdminOrderNotification(emailData),
+      sendCustomerOrderConfirmation(emailData),
+    ]).catch(error => {
+      console.error('Error sending emails:', error);
+      // Don't fail the request if email fails
+    });
 
     return NextResponse.json({ 
       orderId: order.id,

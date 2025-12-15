@@ -28,6 +28,15 @@ YKS_SECRET_KEY=your_secret_key_here
 YKS_WEBHOOK_TOKEN=generate_long_random_string_here
 YKS_SEND_RECEIPT=false
 
+# Email Settings (Gmail SMTP - Free)
+# To get Gmail App Password:
+# 1. Go to https://myaccount.google.com/apppasswords
+# 2. Select "Mail" and "Other (Custom name)" -> "JRZ Site"
+# 3. Copy the 16-character password and use it below
+SMTP_USER=your_email@gmail.com
+SMTP_PASSWORD=your_gmail_app_password
+ADMIN_EMAIL=oaegoshina@gmail.com
+
 # Analytics (optional)
 YANDEX_METRICA_ID=
 PLAUSIBLE_DOMAIN=
