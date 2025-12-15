@@ -1,13 +1,41 @@
 # Email Setup Guide
 
-This site uses **Gmail SMTP** to send automated email notifications (completely free).
+This site supports multiple SMTP providers for sending automated email notifications.
 
-## Setup Instructions
+## Option 1: Reg.ru Business Email (Recommended)
 
-### 1. Enable 2-Step Verification (if not already enabled)
+If you have a business email registered with reg.ru, use these settings:
+
+### Configure Environment Variables
+
+Add these to your `.env.local` file (or Vercel environment variables):
+
+```env
+# Reg.ru SMTP Settings
+SMTP_HOST=mail.hosting.reg.ru
+SMTP_PORT=465
+SMTP_SECURE=true
+SMTP_USER=your_email@yourdomain.com     # Your full reg.ru email address
+SMTP_PASSWORD=your_email_password        # Your email password
+ADMIN_EMAIL=oaegoshina@gmail.com         # Admin email for order notifications
+```
+
+**Important Notes:**
+- Use your **full email address** as `SMTP_USER` (e.g., `info@yourdomain.com`)
+- Use your **regular email password** (not an app password)
+- `ADMIN_EMAIL` is where order notifications will be sent (already set to oaegoshina@gmail.com)
+
+### Reg.ru SMTP Details:
+- **SMTP Server**: `mail.hosting.reg.ru`
+- **Port**: `465`
+- **Encryption**: SSL/TLS
+- **Authentication**: Required (use full email and password)
+
+## Option 2: Gmail SMTP (Free Alternative)
+
+### 1. Enable 2-Step Verification
 1. Go to [Google Account Security](https://myaccount.google.com/security)
-2. Enable "2-Step Verification" if it's not already enabled
-3. This is required to generate App Passwords
+2. Enable "2-Step Verification" if not already enabled
 
 ### 2. Generate Gmail App Password
 1. Go to [App Passwords](https://myaccount.google.com/apppasswords)
@@ -15,24 +43,21 @@ This site uses **Gmail SMTP** to send automated email notifications (completely 
    - **App**: Mail
    - **Device**: Other (Custom name) → Enter "JRZ Site"
 3. Click "Generate"
-4. Copy the 16-character password (it will look like: `abcd efgh ijkl mnop`)
+4. Copy the 16-character password
 
 ### 3. Configure Environment Variables
 
-Add these to your `.env.local` file:
-
 ```env
-# Email Settings (Gmail SMTP)
-SMTP_USER=your_email@gmail.com          # Your Gmail address
-SMTP_PASSWORD=abcdefghijklmnop           # The 16-character App Password (no spaces)
-ADMIN_EMAIL=oaegoshina@gmail.com          # Admin email for order notifications
+# Gmail SMTP Settings (don't set SMTP_HOST for Gmail)
+SMTP_USER=your_email@gmail.com
+SMTP_PASSWORD=your_16_char_app_password
+ADMIN_EMAIL=oaegoshina@gmail.com
 ```
 
 **Important Notes:**
+- **Don't set** `SMTP_HOST` when using Gmail (it will auto-detect)
 - Use the **16-character App Password**, NOT your regular Gmail password
 - Remove spaces from the password when pasting
-- The `SMTP_USER` should be the same Gmail account you're using
-- `ADMIN_EMAIL` is where order notifications will be sent (already set to oaegoshina@gmail.com)
 
 ### 4. Test Email Functionality
 
