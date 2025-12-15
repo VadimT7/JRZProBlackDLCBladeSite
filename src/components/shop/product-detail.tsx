@@ -6,7 +6,7 @@ import { useTranslations } from 'next-intl';
 import { ShoppingCart, Star, Shield, Truck, RotateCcw } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useCartStore } from '@/lib/cart-store';
-import { formatCurrency, mmToEuropeanShoeSize } from '@/lib/utils';
+import { mmToEuropeanShoeSize } from '@/lib/utils';
 type ProductWithVariants = {
   id: string;
   name: string;

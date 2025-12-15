@@ -7,14 +7,13 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X, Minus, Plus, ShoppingBag } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useCartStore } from '@/lib/cart-store';
-import { formatPrice, mmToEuropeanShoeSize } from '@/lib/utils';
+import { mmToEuropeanShoeSize } from '@/lib/utils';
 
 export function CartDrawer() {
   const t = useTranslations('cart');
   const tShop = useTranslations('shop.product');
   const locale = useLocale();
-  const { isOpen, closeCart, items, removeItem, updateQuantity, clearCart, getTotalPrice } = useCartStore();
-  const totalPrice = getTotalPrice();
+  const { isOpen, closeCart, items, removeItem, updateQuantity, clearCart } = useCartStore();
 
   // Helper function to display correct variant type
   const getDisplayVariantType = (variantType: string) => {

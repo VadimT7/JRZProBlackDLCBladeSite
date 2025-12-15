@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { useTranslations } from 'next-intl';
-import { MessageCircle, Send as TelegramIcon, Mail } from 'lucide-react';
+import { MessageCircle } from 'lucide-react';
 
 export function ContactInfo() {
   const t = useTranslations('contact.info');

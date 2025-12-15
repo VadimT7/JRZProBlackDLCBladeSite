@@ -10,7 +10,7 @@ import { z } from 'zod';
 import { Loader2, Package } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useCartStore } from '@/lib/cart-store';
-import { formatPrice, mmToEuropeanShoeSize } from '@/lib/utils';
+import { mmToEuropeanShoeSize } from '@/lib/utils';
 
 const checkoutSchema = z.object({
   fullName: z.string().min(2),
@@ -27,7 +27,6 @@ type CheckoutForm = z.infer<typeof checkoutSchema>;
 
 export default function CheckoutPage() {
   const t = useTranslations('checkout');
-  const tCommon = useTranslations('common');
   const tErrors = useTranslations('errors');
   const tShop = useTranslations('shop.product');
   const locale = useLocale();

@@ -7,7 +7,7 @@ import { useLocale, useTranslations } from 'next-intl';
 import Image from 'next/image';
 import { ShoppingCart, Star } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { formatPrice, mmToEuropeanShoeSize } from '@/lib/utils';
+import { mmToEuropeanShoeSize } from '@/lib/utils';
 import { useCartStore } from '@/lib/cart-store';
 // import type { Product, Variant } from '@prisma/client'; // Types used in ProductWithVariants
 

@@ -3,8 +3,8 @@
 import { useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { motion } from 'framer-motion';
-import { CheckCircle2, Clock, XCircle, Loader2, Package, Star, Shield, Truck, Phone, Mail, Calendar } from 'lucide-react';
-import { formatPrice, mmToEuropeanShoeSize } from '@/lib/utils';
+import { CheckCircle2, Clock, XCircle, Loader2, Package, Star, Shield, Truck, Phone, Mail } from 'lucide-react';
+import { mmToEuropeanShoeSize } from '@/lib/utils';
 import Link from 'next/link';
 import { useLocale } from 'next-intl';
 

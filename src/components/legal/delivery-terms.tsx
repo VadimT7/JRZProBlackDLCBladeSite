@@ -2,30 +2,10 @@
 
 import { motion } from 'framer-motion';
 import { useTranslations } from 'next-intl';
-import { MapPin, Clock, Truck, Package } from 'lucide-react';
+import { Package } from 'lucide-react';
 
 export function DeliveryTerms() {
   const t = useTranslations('legal.delivery');
-
-  const sections = [
-    {
-      key: 'coverage',
-      icon: MapPin,
-    },
-    {
-      key: 'timing',
-      icon: Clock,
-      items: t.raw('sections.timing.items') as string[],
-    },
-    {
-      key: 'shipping',
-      icon: Truck,
-    },
-    {
-      key: 'tracking',
-      icon: Package,
-    },
-  ];
 
   return (
     <div className="min-h-screen">
