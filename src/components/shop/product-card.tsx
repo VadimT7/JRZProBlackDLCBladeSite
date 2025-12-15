@@ -133,8 +133,8 @@ export function ProductCard({ product }: ProductCardProps) {
             <span className="text-sm text-dlc-text-secondary">({t('reviewCount')})</span>
           </div>
 
-          {/* Price */}
-          <p className="text-3xl font-bold mb-8">{formatPrice(product.price)}</p>
+          {/* Order Info */}
+          <p className="text-xl text-dlc-gold mb-8">Под заказ, поставка от 2х рабочих дней</p>
         </div>
 
         {/* Variant Selection */}
@@ -170,12 +170,11 @@ export function ProductCard({ product }: ProductCardProps) {
                 <button
                   key={variant.id}
                   onClick={() => setSelectedSize(variant.size)}
-                  disabled={variant.stock === 0}
                   className={`glass p-3 rounded-lg text-center transition-all ${
                     selectedSize === variant.size || (!selectedSize && variant === currentVariants[0])
                       ? 'border-dlc-silver'
                       : 'hover:border-dlc-silver/50'
-                  } ${variant.stock === 0 ? 'opacity-50 cursor-not-allowed' : ''}`}
+                  }`}
                 >
                   <span className="block text-sm">{mmToEuropeanShoeSize(variant.size)}</span>
                 </button>
@@ -184,21 +183,12 @@ export function ProductCard({ product }: ProductCardProps) {
           </div>
         </div>
 
-        {/* Stock Status */}
-        <p className="text-sm mb-6">
-          {selectedVariant && selectedVariant.stock > 0 ? (
-            <span className="text-green-500">✓ {t('stock')}</span>
-          ) : (
-            <span className="text-red-500">✗ {t('outOfStock')}</span>
-          )}
-        </p>
-
         {/* Add to Cart */}
         <Button
           size="xl"
           className="w-full"
           onClick={handleAddToCart}
-          disabled={!selectedVariant || selectedVariant.stock === 0}
+          disabled={!selectedVariant}
         >
           <ShoppingCart className="w-5 h-5 mr-2" />
           {useTranslations('common')('addToCart')}

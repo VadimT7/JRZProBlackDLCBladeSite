@@ -2,7 +2,6 @@
 
 import { motion } from 'framer-motion';
 import { useTranslations } from 'next-intl';
-import { CheckCircle2 } from 'lucide-react';
 
 const sizingData = [
   { size: '221', length: 221, shoeSize: '36-37', available: true },
@@ -44,9 +43,6 @@ export function SizingTable() {
                     <th className="px-6 py-3 text-left text-xs font-medium text-dlc-text-secondary uppercase tracking-wider">
                       {t('shoeSize')}
                     </th>
-                    <th className="px-6 py-3 text-center text-xs font-medium text-dlc-text-secondary uppercase tracking-wider">
-                      {t('availability')}
-                    </th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-dlc-silver/10">
@@ -67,11 +63,6 @@ export function SizingTable() {
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-dlc-text-secondary">
                         {row.shoeSize}
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-center">
-                        {row.available && (
-                          <CheckCircle2 className="w-5 h-5 text-green-500 mx-auto" />
-                        )}
                       </td>
                     </motion.tr>
                   ))}

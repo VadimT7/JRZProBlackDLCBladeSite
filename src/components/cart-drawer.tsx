@@ -123,8 +123,8 @@ export function CartDrawer() {
                             <Plus className="h-3 w-3" />
                           </Button>
                         </div>
-                        <p className="font-medium">
-                          {formatPrice(item.price * item.quantity)}
+                        <p className="font-medium text-dlc-gold text-sm">
+                          Под заказ
                         </p>
                       </div>
                     </motion.div>
@@ -136,9 +136,10 @@ export function CartDrawer() {
             {/* Footer */}
             {items.length > 0 && (
               <div className="border-t border-dlc-silver/10 p-6 space-y-4">
-                <div className="flex justify-between text-lg font-semibold">
-                  <span>{t('total')}</span>
-                  <span>{formatPrice(totalPrice)}</span>
+                <div className="bg-dlc-elevation/30 p-3 rounded-lg">
+                  <p className="text-sm text-dlc-text-secondary text-center">
+                    Цена будет согласована при обсуждении заказа
+                  </p>
                 </div>
                 <Link href={`/${locale}/checkout`} className="block">
                   <Button className="w-full" size="lg" onClick={closeCart}>

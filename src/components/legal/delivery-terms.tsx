@@ -52,47 +52,30 @@ export function DeliveryTerms() {
       {/* Content Sections */}
       <section className="py-16">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto space-y-16">
-            {sections.map((section, index) => {
-              const Icon = section.icon;
-              return (
-                <motion.div
-                  key={section.key}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className="glass p-8 rounded-2xl"
-                >
-                  <div className="flex items-start gap-6">
-                    <div className="flex-shrink-0">
-                      <div className="w-12 h-12 bg-gradient-to-br from-dlc-silver to-dlc-gold rounded-lg flex items-center justify-center">
-                        <Icon className="w-6 h-6 text-dlc-bg" />
-                      </div>
-                    </div>
-                    <div className="flex-1">
-                      <h2 className="text-2xl font-cormorant font-bold mb-4">
-                        {t(`sections.${section.key}.title`)}
-                      </h2>
-                      {section.items ? (
-                        <div className="space-y-3">
-                          {section.items.map((item, itemIndex) => (
-                            <div key={itemIndex} className="flex items-start gap-2">
-                              <span className="text-dlc-silver mt-1">•</span>
-                              <span className="text-dlc-text-secondary">{item}</span>
-                            </div>
-                          ))}
-                        </div>
-                      ) : (
-                        <p className="text-dlc-text-secondary">
-                          {t(`sections.${section.key}.description`)}
-                        </p>
-                      )}
-                    </div>
+          <div className="max-w-4xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="glass p-8 rounded-2xl"
+            >
+              <div className="flex items-start gap-6">
+                <div className="flex-shrink-0">
+                  <div className="w-12 h-12 bg-gradient-to-br from-dlc-silver to-dlc-gold rounded-lg flex items-center justify-center">
+                    <Package className="w-6 h-6 text-dlc-bg" />
                   </div>
-                </motion.div>
-              );
-            })}
+                </div>
+                <div className="flex-1">
+                  <h2 className="text-2xl font-cormorant font-bold mb-4">
+                    {t('sections.info.title')}
+                  </h2>
+                  <p className="text-dlc-text-secondary text-lg">
+                    {t('sections.info.description')}
+                  </p>
+                </div>
+              </div>
+            </motion.div>
           </div>
         </div>
       </section>

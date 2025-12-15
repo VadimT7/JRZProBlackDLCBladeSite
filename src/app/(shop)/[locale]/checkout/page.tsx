@@ -354,25 +354,18 @@ export default function CheckoutPage() {
                           {getDisplayVariantType(item.variantType)} • {mmToEuropeanShoeSize(item.variantSize)} × {item.quantity}
                         </p>
                       </div>
-                      <p className="font-medium">
-                        {formatPrice(item.price * item.quantity)}
+                      <p className="font-medium text-dlc-gold">
+                        Под заказ
                       </p>
                     </div>
                   ))}
                 </div>
 
-                <div className="border-t border-dlc-silver/10 pt-4 space-y-2">
-                  <div className="flex justify-between">
-                    <span>{t('summary.items')}</span>
-                    <span>{formatPrice(totalPrice)}</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span>{t('summary.shipping')}</span>
-                    <span className="text-green-500">{tCommon('free')}</span>
-                  </div>
-                  <div className="flex justify-between text-lg font-semibold pt-2 border-t border-dlc-silver/10">
-                    <span>{t('summary.total')}</span>
-                    <span>{formatPrice(totalPrice)}</span>
+                <div className="border-t border-dlc-silver/10 pt-4">
+                  <div className="bg-dlc-elevation/30 p-4 rounded-lg">
+                    <p className="text-sm text-dlc-text-secondary text-center">
+                      Цена и условия доставки будут согласованы при обсуждении заказа
+                    </p>
                   </div>
                 </div>
               </div>

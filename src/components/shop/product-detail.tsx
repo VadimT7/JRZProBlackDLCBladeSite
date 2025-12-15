@@ -126,8 +126,8 @@ export function ProductDetail({ product }: ProductDetailProps) {
                 {product.description}
               </p>
               <div className="flex items-center space-x-4 mb-6">
-                <span className="text-3xl font-bold text-dlc-gold">
-                  {formatCurrency(product.price)}
+                <span className="text-xl text-dlc-gold">
+                  Под заказ, поставка от 2х рабочих дней
                 </span>
                 <div className="flex items-center space-x-1">
                   {[...Array(5)].map((_, i) => (

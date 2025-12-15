@@ -116,11 +116,11 @@ function OrderDetailsSection({ orderData }: { orderData: OrderData }) {
               </div>
               
               <div className="text-right ml-6">
-                <div className="text-2xl font-bold text-dlc-gold mb-1">
-                  {formatPrice(item.price * item.quantity)}
+                <div className="text-lg font-bold text-dlc-gold mb-1">
+                  Под заказ
                 </div>
                 <div className="text-sm text-dlc-text-secondary">
-                  {formatPrice(item.price)} × {item.quantity}
+                  Поставка от 2х рабочих дней
                 </div>
               </div>
             </div>
@@ -128,25 +128,18 @@ function OrderDetailsSection({ orderData }: { orderData: OrderData }) {
         ))}
       </div>
 
-      {/* Luxury Total Section */}
+      {/* Order Info Section */}
       <div className="bg-gradient-to-r from-dlc-gold/5 via-dlc-gold/10 to-dlc-gold/5 p-8 rounded-2xl border border-dlc-gold/20">
-        <div className="flex justify-between items-center">
-          <div>
-            <h3 className="text-2xl font-cormorant font-bold text-dlc-gold mb-2">
-              {locale === 'ru' ? 'Общая стоимость' : 'Total Amount'}
-            </h3>
-            <p className="text-dlc-text-secondary">
-              {locale === 'ru' ? 'Включая бесплатную доставку по России' : 'Including free shipping across Russia'}
-            </p>
-          </div>
-          <div className="text-right">
-            <div className="text-4xl font-bold text-dlc-gold">
-              {formatPrice(orderData.amount)}
-            </div>
-            <div className="text-sm text-dlc-text-secondary">
-              {locale === 'ru' ? 'Окончательная цена' : 'Final Price'}
-            </div>
-          </div>
+        <div className="text-center">
+          <h3 className="text-2xl font-cormorant font-bold text-dlc-gold mb-2">
+            {locale === 'ru' ? 'Информация о заказе' : 'Order Information'}
+          </h3>
+          <p className="text-dlc-text-secondary text-lg mb-4">
+            {locale === 'ru' ? 'Цена и условия доставки будут согласованы при обсуждении заказа' : 'Price and delivery terms will be agreed upon when discussing the order'}
+          </p>
+          <p className="text-dlc-gold font-semibold">
+            {locale === 'ru' ? 'Поставка от 2х рабочих дней' : 'Delivery from 2 working days'}
+          </p>
         </div>
       </div>
     </div>

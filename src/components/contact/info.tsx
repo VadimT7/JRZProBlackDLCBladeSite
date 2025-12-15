@@ -9,25 +9,11 @@ export function ContactInfo() {
 
   const contactMethods = [
     {
-      icon: TelegramIcon,
-      label: t('telegram'),
-      value: '@JRZProSupport',
-      href: 'https://t.me/JRZProSupport',
-      color: 'text-blue-400',
-    },
-    {
       icon: MessageCircle,
-      label: t('whatsapp'),
-      value: '+7 (999) 123-45-67',
-      href: 'https://wa.me/79991234567',
+      label: t('phone'),
+      value: '+7 925 480-54-93',
+      href: 'tel:+79254805493',
       color: 'text-green-400',
-    },
-    {
-      icon: Mail,
-      label: t('email'),
-      value: 'support@jrzpro.ru',
-      href: 'mailto:support@jrzpro.ru',
-      color: 'text-dlc-silver',
     },
   ];
 
@@ -43,13 +29,16 @@ export function ContactInfo() {
           {t('title')}
         </h3>
         
-        <div className="space-y-4">
+        <div className="space-y-6">
+          <div className="mb-6">
+            <p className="text-sm text-dlc-text-secondary mb-2">{t('distributor')}</p>
+            <p className="text-lg font-semibold text-dlc-gold">{t('company')}</p>
+          </div>
+          
           {contactMethods.map((method, index) => (
             <motion.a
               key={method.label}
               href={method.href}
-              target="_blank"
-              rel="noopener noreferrer"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: index * 0.1 }}
