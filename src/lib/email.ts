@@ -1,17 +1,35 @@
 import nodemailer from 'nodemailer';
 
-// Create reusable transporter using Gmail SMTP
+// Create reusable transporter using SMTP settings
 const createTransporter = () => {
   if (!process.env.SMTP_USER || !process.env.SMTP_PASSWORD) {
     console.warn('SMTP credentials not configured. Email sending disabled.');
     return null;
   }
 
+  // If custom SMTP host is provided, use custom settings (e.g., reg.ru)
+  if (process.env.SMTP_HOST) {
+    return nodemailer.createTransport({
+      host: process.env.SMTP_HOST,
+      port: parseInt(process.env.SMTP_PORT || '465'),
+      secure: process.env.SMTP_PORT === '465' || process.env.SMTP_SECURE === 'true', // true for 465, false for other ports
+      auth: {
+        user: process.env.SMTP_USER,
+        pass: process.env.SMTP_PASSWORD,
+      },
+      tls: {
+        // Do not fail on invalid certs
+        rejectUnauthorized: false,
+      },
+    });
+  }
+
+  // Default to Gmail if no custom host is specified
   return nodemailer.createTransport({
     service: 'gmail',
     auth: {
       user: process.env.SMTP_USER,
-      pass: process.env.SMTP_PASSWORD, // Gmail App Password
+      pass: process.env.SMTP_PASSWORD,
     },
   });
 };
