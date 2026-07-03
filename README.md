@@ -259,7 +259,3 @@ Private commercial project. All rights reserved.
 - Telegram: @JRZProSupport
 - Email: support@jrzpro.ru
 - WhatsApp: +7 (999) 123-45-67
-
----
-
-Built with ❤️ for Russian hockey players
